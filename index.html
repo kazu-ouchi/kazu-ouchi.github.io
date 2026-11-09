@@ -3,40 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="よく聞く身体の話を10問。○か×で答えると、あなたの思い込み度と思い込みタイプがわかります。運動指導・施術20年のKazu.Ouchiが作成。">
 <meta property="og:title" content="その身体の常識、本当？">
 <meta property="og:description" content="10問の○×で、あなたの思い込み度と思い込みタイプがわかります。">
 <meta property="og:image" content="https://kazu-ouchi.github.io/cover.jpg">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
 <title>その身体の常識、本当？</title>
+<meta name="description" content="よく聞く身体の話を10問。○か×で答えると、あなたの思い込み度と思い込みタイプがわかります。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <style>
-/* Layout: 表紙の絵（らせんの背骨）を全幅で置き、その余白に明朝のタイトル。設問・判定は同じ夜の色の上に。絵に合わせた意図的な単一テーマ */
+/* Layout: 明るい陳列室の「身体の棚」。表紙の絵 → 設問カード → 判定カード（スクショ1枚で完結）。ホームページと同じ色の単一テーマ */
 :root {
-  --night: #05111C;
-  --panel: #0A1926;
-  --line: #20323F;
-  --bone: #EEE6D8;
-  --dim: #95A2AC;
-  --gold: #C9A66B;
-  --gold-soft: rgba(201, 166, 107, .12);
-  --red: #E2553F;
-  --red-soft: rgba(226, 85, 63, .14);
+  --paper: #FBF8F2;
+  --card: #FFFFFF;
+  --ink: #2B2A26;
+  --muted: #6B675E;
+  --rule: #E6DFD2;
+  --wash: #F1ECE2;
+  --sage: #6F7F5C;
+  --sage-soft: #E8ECE0;
+  --terra: #B5563A;
+  --terra-soft: #F6E4DD;
+  --brass: #8A6A3E;
   --mincho: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
   --body: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
-  color-scheme: dark;
+  color-scheme: light;
 }
-body {
-  background: var(--night);
-  color: var(--bone);
-  font-family: var(--body);
-  font-size: 16px;
-  line-height: 1.85;
-  -webkit-text-size-adjust: 100%;
-}
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.85; -webkit-text-size-adjust: 100%; }
 [hidden] { display: none !important; }
 .wrap {
   max-width: 34rem;
@@ -49,26 +44,21 @@ body {
   gap: 20px;
 }
 main, section { display: flex; flex-direction: column; gap: 20px; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--terra); outline-offset: 3px; }
 
 /* 表紙 */
 .cover {
   position: relative;
   margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
   margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   max-width: none;
-  background: var(--night) url("cover.jpg") center top / cover no-repeat;
+  background: var(--wash) url("cover.jpg") center / cover no-repeat;
 }
-.cover::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 22%;
-  background: linear-gradient(transparent, var(--night));
-}
+.cover::after { content: ""; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(transparent, var(--paper)); }
 .cover .tag {
   position: absolute;
-  top: 16px;
+  top: 14px;
   left: max(16px, env(safe-area-inset-left, 0px));
   right: max(16px, env(safe-area-inset-right, 0px));
   display: flex;
@@ -76,279 +66,130 @@ main, section { display: flex; flex-direction: column; gap: 20px; }
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: .16em;
-  color: rgba(238, 230, 216, .7);
+  color: var(--ink);
 }
-.cover-text {
-  position: absolute;
-  z-index: 1;
-  left: max(20px, env(safe-area-inset-left, 0px));
-  right: max(20px, env(safe-area-inset-right, 0px));
-  bottom: 6%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.eyebrow { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: var(--gold); }
-h1 {
-  margin: 0;
-  font-family: var(--mincho);
-  font-weight: 800;
-  font-size: clamp(2.3rem, 10.5vw, 3.3rem);
-  line-height: 1.32;
-  letter-spacing: .05em;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, .6);
-}
-h1 span { color: var(--red); }
-
+.cover .tag span { background: rgba(251, 248, 242, .85); padding: 2px 8px; }
+.eyebrow { margin: -6px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: var(--brass); }
+h1 { margin: -8px 0 0; font-family: var(--mincho); font-weight: 800; font-size: clamp(2.3rem, 10.5vw, 3.2rem); line-height: 1.3; letter-spacing: .04em; }
+h1 span { color: var(--terra); }
 .lead { margin: 0; }
-.lead b { color: var(--gold); font-weight: 700; }
-.scale { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.lead b { color: var(--terra); }
+.scale { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .scale ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; }
 .scale li { display: flex; align-items: center; gap: 10px; padding: 11px 4px; font-size: 14px; }
-.scale li:nth-child(n+3) { border-top: 1px solid var(--line); }
-.scale .g {
-  flex: none;
-  width: 26px;
-  height: 26px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--red);
-  border-radius: 50%;
-  color: var(--red);
-  font-family: var(--mincho);
-  font-weight: 800;
-  font-size: 14px;
-  line-height: 1;
-}
-.byline { margin: 0; font-size: 13px; line-height: 1.7; color: var(--dim); }
+.scale li:nth-child(n+3) { border-top: 1px solid var(--rule); }
+.scale .g { flex: none; width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid var(--terra); border-radius: 50%; color: var(--terra); font-family: var(--mincho); font-weight: 800; font-size: 14px; line-height: 1; }
+.byline { margin: 0; font-size: 13px; line-height: 1.7; color: var(--muted); }
 
-/* ボタン */
 .primary, .secondary {
   display: block;
   width: 100%;
   box-sizing: border-box;
-  padding: 17px 16px;
-  border-radius: 2px;
+  padding: 16px;
   font: 700 16px/1.3 var(--body);
-  letter-spacing: .16em;
+  letter-spacing: .14em;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color .15s, color .15s;
+  transition: background-color .15s;
 }
-.primary { border: 1px solid var(--bone); background: var(--bone); color: var(--night); }
-.secondary { border: 1px solid var(--gold); background: transparent; color: var(--gold); }
-@media (hover: hover) {
-  .primary:hover { background: var(--gold); border-color: var(--gold); }
-  .secondary:hover { background: var(--gold-soft); }
-}
-.ghost {
-  align-self: center;
-  background: none;
-  border: 0;
-  padding: 8px 12px;
-  color: var(--dim);
-  font: 14px var(--body);
-  text-decoration: underline;
-  cursor: pointer;
-}
-button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.primary { border: 0; background: var(--ink); color: var(--paper); }
+.primary:hover { background: var(--terra); }
+.secondary { border: 1px solid var(--ink); background: transparent; color: var(--ink); }
+.ghost { align-self: center; background: none; border: 0; padding: 8px 12px; color: var(--muted); font: 14px var(--body); text-decoration: underline; cursor: pointer; }
 
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  padding: 22px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.panel { background: var(--card); border: 1px solid var(--rule); padding: 22px 18px; display: flex; flex-direction: column; gap: 16px; }
 #quiz { margin-top: 20px; }
-
-/* 設問 */
 .qhead { display: flex; flex-direction: column; gap: 10px; }
 .qno { display: flex; align-items: baseline; gap: 8px; }
-.qno #qNum { font-family: var(--mincho); font-weight: 800; font-size: 30px; line-height: 1; color: var(--gold); }
-.qno .qof { font-family: var(--mono); font-size: 13px; color: var(--dim); }
+#qNum { font-family: var(--mincho); font-weight: 800; font-size: 28px; line-height: 1; color: var(--terra); }
+.qof { font-family: var(--mono); font-size: 13px; color: var(--muted); }
 .ticks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
-.ticks li { height: 3px; background: var(--line); }
-.ticks li.cur { background: var(--dim); }
-.ticks li.ok { background: var(--gold); }
-.ticks li.ng { background: var(--red); }
-.qtext {
-  margin: 0;
-  font-family: var(--mincho);
-  font-weight: 700;
-  font-size: clamp(1.3rem, 5.6vw, 1.55rem);
-  line-height: 1.7;
-  text-wrap: pretty;
-  min-height: 5.1em;
-}
+.ticks li { height: 4px; background: var(--wash); }
+.ticks li.cur { background: var(--muted); }
+.ticks li.ok { background: var(--sage); }
+.ticks li.ng { background: var(--terra); }
+.qtext { margin: 0; font-family: var(--mincho); font-weight: 700; font-size: clamp(1.3rem, 5.6vw, 1.5rem); line-height: 1.7; text-wrap: pretty; min-height: 5.1em; }
 .qtext:focus { outline: none; }
 .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .choice {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  min-height: 156px;
-  padding: 22px 8px 14px;
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  color: var(--bone);
-  font: inherit;
-  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  min-height: 150px; padding: 22px 8px 14px;
+  background: var(--paper); border: 1px solid var(--rule); color: var(--ink); font: inherit; cursor: pointer;
   transition: border-color .15s, background-color .15s, opacity .2s;
 }
-@media (hover: hover) { .choice:not(:disabled):hover { border-color: var(--dim); } }
+@media (hover: hover) { .choice:not(:disabled):hover { border-color: var(--muted); } }
 .choice:disabled { cursor: default; }
-.choice.picked { border-color: var(--gold); background: var(--gold-soft); }
+.choice.picked { border-color: var(--ink); background: var(--card); }
 .choice.dim { opacity: .3; }
-.mk { position: relative; width: 66px; height: 66px; }
-.mk-maru { box-sizing: border-box; border: 7px solid var(--bone); border-radius: 50%; }
-.mk-batsu::before, .mk-batsu::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 84px;
-  height: 7px;
-  background: var(--bone);
-  transform: translate(-50%, -50%) rotate(45deg);
-}
+.mk { position: relative; width: 62px; height: 62px; }
+.mk-maru { box-sizing: border-box; border: 7px solid var(--terra); border-radius: 50%; }
+.mk-batsu::before, .mk-batsu::after { content: ""; position: absolute; left: 50%; top: 50%; width: 80px; height: 7px; background: var(--sage); transform: translate(-50%, -50%) rotate(45deg); }
 .mk-batsu::after { transform: translate(-50%, -50%) rotate(-45deg); }
-.choice.picked .mk-maru { border-color: var(--gold); }
-.choice.picked .mk-batsu::before, .choice.picked .mk-batsu::after { background: var(--gold); }
 .cap { font-size: 14px; font-weight: 700; letter-spacing: .14em; }
 
-.reveal { display: flex; flex-direction: column; gap: 12px; padding-top: 18px; border-top: 1px solid var(--line); animation: rise .25s ease-out; }
+.reveal { display: flex; flex-direction: column; gap: 12px; padding-top: 18px; border-top: 1px solid var(--rule); animation: rise .25s ease-out; }
 .verdict { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.stamp {
-  display: inline-block;
-  padding: 2px 12px;
-  border: 1.5px solid currentColor;
-  font-family: var(--mincho);
-  font-weight: 800;
-  font-size: 18px;
-  line-height: 1.5;
-  transform: rotate(-4deg);
-}
-.stamp.ok { color: var(--gold); background: var(--gold-soft); }
-.stamp.ng { color: var(--red); background: var(--red-soft); }
-.vans { font-size: 14px; font-weight: 700; color: var(--dim); }
-.vans .m { font-family: var(--mincho); font-weight: 800; font-size: 20px; margin-left: 6px; color: var(--bone); }
-.rlabel { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--dim); }
+.stamp { display: inline-block; padding: 2px 12px; border: 1.5px solid currentColor; font-family: var(--mincho); font-weight: 800; font-size: 18px; line-height: 1.5; transform: rotate(-4deg); }
+.stamp.ok { color: var(--sage); background: var(--sage-soft); }
+.stamp.ng { color: var(--terra); background: var(--terra-soft); }
+.vans { font-size: 14px; font-weight: 700; color: var(--muted); }
+.vans .m { font-family: var(--mincho); font-weight: 800; font-size: 20px; margin-left: 6px; color: var(--ink); }
+.rlabel { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--brass); }
 .rhead { margin: -6px 0 0; font-family: var(--mincho); font-weight: 800; font-size: 20px; line-height: 1.5; text-wrap: balance; }
 .rbody { margin: 0; font-size: 15.5px; line-height: 1.95; }
+.src { margin: 0; padding: 10px 12px; background: var(--wash); font-size: 12.5px; line-height: 1.7; color: var(--muted); }
+.src b { color: var(--brass); margin-right: 6px; }
 
-/* 結果：スクショ1枚で完結するカード */
-#result { margin-top: 0; }
-.rcard {
-  position: relative;
-  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
-  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
-  aspect-ratio: 9 / 16;
-  max-width: none;
-  background: var(--night) url("story-bg.jpg") center -60px / 100% auto no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.rcard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(rgba(5, 17, 28, 0) 28%, rgba(5, 17, 28, .92) 52%, var(--night) 62%);
-}
-.rcard .tag {
-  position: absolute;
-  top: 14px;
-  left: max(18px, env(safe-area-inset-left, 0px));
-  right: max(18px, env(safe-area-inset-right, 0px));
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: .16em;
-  color: rgba(238, 230, 216, .7);
-}
-.rbody-wrap {
-  position: relative;
-  padding: 0 max(22px, env(safe-area-inset-right, 0px)) 22px max(22px, env(safe-area-inset-left, 0px));
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.card-top { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--gold); }
-.card-top::after { content: ""; flex: 1; height: 1px; background: rgba(201, 166, 107, .45); }
+/* 結果カード */
+#result { margin-top: 20px; }
+.rcard { background: var(--card); border: 1px solid var(--rule); display: flex; flex-direction: column; }
+.rcard .pic { aspect-ratio: 16 / 9; max-width: 100%; background: var(--wash) url("cover.jpg") center 40% / cover no-repeat; position: relative; }
+.rcard .pic span { position: absolute; top: 10px; left: 12px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; background: rgba(251, 248, 242, .88); padding: 2px 8px; }
+.rcard .in { padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+.card-top { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--brass); }
+.card-top::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
 .card-main { display: flex; align-items: center; gap: 18px; }
-.gstamp {
-  flex: none;
-  width: 84px;
-  height: 84px;
-  box-sizing: border-box;
-  display: grid;
-  place-items: center;
-  border: 3px solid var(--red);
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 3px var(--night), inset 0 0 0 4px var(--red);
-  color: var(--red);
-  transform: rotate(-8deg);
-}
+.gstamp { flex: none; width: 80px; height: 80px; box-sizing: border-box; display: grid; place-items: center; border: 3px solid var(--terra); border-radius: 50%; box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px var(--terra); color: var(--terra); transform: rotate(-8deg); }
 .gstamp.press { animation: press .45s cubic-bezier(.2, .8, .3, 1.2); }
-.gstamp .gl { font-family: var(--mincho); font-weight: 800; font-size: 44px; line-height: 1; }
+.gstamp .gl { font-family: var(--mincho); font-weight: 800; font-size: 40px; line-height: 1; }
 .judge { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.gname { font-family: var(--mincho); font-weight: 800; font-size: 24px; line-height: 1.3; color: var(--red); }
+.slabel { font-size: 12px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
+.gname { font-family: var(--mincho); font-weight: 800; font-size: 22px; line-height: 1.35; color: var(--terra); }
 .score { display: flex; flex-direction: column; gap: 6px; }
-.score-label { font-size: 12px; font-weight: 700; letter-spacing: .12em; color: var(--dim); }
-.score-num { font-family: var(--mincho); font-weight: 800; font-size: 60px; line-height: 1; font-variant-numeric: tabular-nums; }
-.score-num small { font-size: 24px; margin-left: 4px; }
+.score-num { font-family: var(--mincho); font-weight: 800; font-size: 54px; line-height: 1; font-variant-numeric: tabular-nums; }
+.score-num small { font-size: 22px; margin-left: 4px; }
 .meter { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; max-width: 280px; }
-.meter span { height: 6px; background: rgba(238, 230, 216, .14); }
-.meter span.on { background: var(--red); }
-.typeline { display: flex; flex-direction: column; gap: 2px; }
-.tname { font-family: var(--mincho); font-weight: 800; font-size: clamp(1.7rem, 8vw, 2.2rem); line-height: 1.35; }
-.tshort { margin: 4px 0 0; font-size: 14px; line-height: 1.75; }
-.rfoot { display: flex; flex-direction: column; gap: 2px; padding-top: 12px; border-top: 1px solid rgba(238, 230, 216, .18); }
-.rtitle { font-family: var(--mincho); font-weight: 800; font-size: 17px; }
-.rhandle { font-size: 12px; color: var(--dim); }
-.rhandle b { font-family: var(--mono); font-weight: 500; color: var(--gold); }
-.ask { margin: 0; text-align: center; font-family: var(--mincho); font-weight: 700; font-size: 18px; line-height: 1.6; color: var(--bone); }
-
-.sec-h { align-self: stretch; text-align: left; }
-.story-frame { width: min(300px, 74%); max-width: 100%; aspect-ratio: 9 / 16; display: grid; place-items: center; border: 1px solid var(--line); background: var(--night); overflow: hidden; }
-.story-frame img { width: 100%; height: 100%; display: block; -webkit-touch-callout: default; }
-.story-wait { font-size: 13px; color: var(--dim); }
-.story-hint { margin: 0; font-size: 14px; line-height: 1.75; }
-.story-hint small { display: block; font-size: 12px; color: var(--dim); }
-.save-msg { margin: 0; min-height: 1.2em; font-size: 13px; color: var(--gold); }
+.meter span { height: 6px; background: var(--wash); }
+.meter span.on { background: var(--terra); }
+.tname { font-family: var(--mincho); font-weight: 800; font-size: clamp(1.6rem, 7.4vw, 2rem); line-height: 1.35; }
+.tshort { margin: 2px 0 0; font-size: 14.5px; line-height: 1.8; color: var(--muted); }
+.rfoot { display: flex; flex-direction: column; gap: 2px; padding-top: 12px; border-top: 1px solid var(--rule); }
+.rtitle { font-family: var(--mincho); font-weight: 800; font-size: 16px; }
+.rhandle { font-size: 12px; color: var(--muted); }
+.rhandle b { font-family: var(--mono); font-weight: 500; color: var(--terra); }
+.ask { margin: 0; text-align: center; font-family: var(--mincho); font-weight: 700; font-size: 18px; line-height: 1.6; }
 
 .sec-h { margin: 0; font-family: var(--mincho); font-weight: 800; font-size: 19px; line-height: 1.5; }
-.rx { margin: 0; padding-left: 12px; border-left: 2px solid var(--red); font-size: 15px; line-height: 1.8; }
-.rx b { display: block; font-size: 12px; letter-spacing: .16em; color: var(--red); }
+.rx { margin: 0; padding-left: 12px; border-left: 2px solid var(--terra); font-size: 15px; line-height: 1.8; }
+.rx b { display: block; font-size: 12px; letter-spacing: .16em; color: var(--terra); }
 .items { list-style: none; margin: 0; padding: 0; }
-.items li { display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.6; }
+.items li { display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: 12px; padding: 11px 0; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.6; }
 .items li:first-child { border-top: 0; padding-top: 0; }
-.items .no { font-family: var(--mono); font-size: 12px; color: var(--dim); padding-top: 2px; }
+.items .no { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
 .items .lb { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.items .find { font-size: 13px; color: var(--gold); }
+.items .find { font-size: 13px; color: var(--brass); }
 .pill { padding: 1px 10px; font-size: 12px; font-weight: 700; white-space: nowrap; }
-.pill.ok { color: var(--gold); background: var(--gold-soft); }
-.pill.ng { color: var(--red); background: var(--red-soft); }
+.pill.ok { color: var(--sage); background: var(--sage-soft); }
+.pill.ng { color: var(--terra); background: var(--terra-soft); }
 .cta p { margin: 0; }
-
-.note { font-size: 12px; line-height: 1.7; color: var(--dim); }
+.note { font-size: 12px; line-height: 1.7; color: var(--muted); }
 
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @keyframes press { from { opacity: 0; transform: rotate(-8deg) scale(1.4); } to { opacity: 1; transform: rotate(-8deg) scale(1); } }
-@media (prefers-reduced-motion: reduce) {
-  .reveal, .gstamp.press { animation: none; }
-  .choice, .primary, .secondary { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { .reveal, .gstamp.press { animation: none; } .choice, .primary { transition: none; } }
 @media (min-width: 560px) {
-  .cover, .rcard { margin-left: 0; margin-right: 0; margin-top: 16px; }
+  .cover { margin: 16px 0 0; }
   .panel { padding: 26px; }
   .scale ul { grid-template-columns: repeat(4, 1fr); }
   .scale li { flex-direction: column; text-align: center; gap: 6px; font-size: 13px; }
@@ -362,14 +203,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
 <div class="wrap">
   <main>
     <section id="start">
-      <div class="cover">
-        <div class="tag"><span>BODY MYTHS ／ 10 Q</span><span>KAZU.OUCHI</span></div>
-        <div class="cover-text">
-          <p class="eyebrow">全10問 ・ 約2分 ・ ○×で答えるだけ</p>
-          <h1>その身体の<br>常識、<span>本当？</span></h1>
-        </div>
-      </div>
-      <p class="lead">テレビやネットで「よく聞く身体の話」を10個集めました。○か×で答えると、あなたの<b>思い込み度</b>と<b>思い込みタイプ</b>がわかります。1問ごとに、身体の仕組みの解説つき。</p>
+      <div class="cover"><div class="tag"><span>ROOM 1 ／ BODY</span><span>10 Q</span></div></div>
+      <p class="eyebrow">全10問 ・ 約2分 ・ ○×で答えるだけ</p>
+      <h1>その身体の<br>常識、<span>本当？</span></h1>
+      <p class="lead">テレビやネットで「よく聞く身体の話」を10個集めました。○か×で答えると、あなたの<b>思い込み度</b>と<b>思い込みタイプ</b>がわかります。1問ごとに、身体の仕組みの解説と根拠つき。</p>
       <div class="scale" aria-label="判定区分">
         <ul>
           <li><span class="g">A</span>異常なし</li>
@@ -389,44 +226,36 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
       </div>
       <p class="qtext" id="qText" tabindex="-1"></p>
       <div class="choices">
-        <button type="button" class="choice" id="btnMaru" aria-label="○ そのとおり">
-          <span class="mk mk-maru" aria-hidden="true"></span>
-          <span class="cap">そのとおり</span>
-        </button>
-        <button type="button" class="choice" id="btnBatsu" aria-label="× ちがう">
-          <span class="mk mk-batsu" aria-hidden="true"></span>
-          <span class="cap">ちがう</span>
-        </button>
+        <button type="button" class="choice" id="btnMaru" aria-label="○ そのとおり"><span class="mk mk-maru" aria-hidden="true"></span><span class="cap">そのとおり</span></button>
+        <button type="button" class="choice" id="btnBatsu" aria-label="× ちがう"><span class="mk mk-batsu" aria-hidden="true"></span><span class="cap">ちがう</span></button>
       </div>
       <div id="reveal" class="reveal" hidden aria-live="polite">
-        <div class="verdict">
-          <span class="stamp" id="vStamp">正解</span>
-          <span class="vans" id="vAns"></span>
-        </div>
+        <div class="verdict"><span class="stamp" id="vStamp">正解</span><span class="vans" id="vAns"></span></div>
         <p class="rlabel">MECHANISM ／ 身体の仕組み</p>
         <h2 class="rhead" id="rHead"></h2>
         <p class="rbody" id="rBody"></p>
+        <p class="src" id="rSrc"></p>
         <button type="button" class="primary" id="nextBtn">次の問題へ</button>
       </div>
     </section>
 
     <section id="result" hidden>
-      <div class="rcard" id="rcard">
-        <div class="tag"><span>BODY MYTHS ／ RESULT</span><span>KAZU.OUCHI</span></div>
-        <div class="rbody-wrap">
+      <div class="rcard">
+        <div class="pic"><span>BODY MYTHS ／ RESULT</span></div>
+        <div class="in">
           <div class="card-top"><span>検査結果</span></div>
           <div class="card-main">
             <div class="gstamp" id="gStamp"><span class="gl" id="gLetter">A</span></div>
-            <div class="judge"><span class="score-label">判定</span><span class="gname" id="gName">異常なし</span></div>
+            <div class="judge"><span class="slabel">判定</span><span class="gname" id="gName">異常なし</span></div>
           </div>
           <div class="score">
-            <div class="score-label">思い込み度</div>
+            <span class="slabel">思い込み度</span>
             <div class="score-num"><span id="pct">0</span><small>%</small></div>
             <div class="meter" id="meter" aria-hidden="true"></div>
           </div>
-          <div class="typeline">
-            <span class="score-label">あなたは</span>
-            <span class="tname" id="tName"></span>
+          <div>
+            <span class="slabel">あなたは</span>
+            <div class="tname" id="tName"></div>
             <p class="tshort" id="tShort"></p>
           </div>
           <div class="rfoot"><span class="rtitle">その身体の常識、本当？</span><span class="rhandle">診断は <b>@kazu.nature_soul</b> のプロフィールから</span></div>
@@ -443,14 +272,13 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
 
       <div class="panel cta">
         <h2 class="sec-h">なぜ、そうなるのか</h2>
-        <p>身体と健康の「当たり前」を、仕組みから掘り下げて発信しています。続きはInstagramで。</p>
+        <p>身体・食・健康の「当たり前」を、仕組みから掘り下げて発信しています。続きはInstagramで。</p>
         <a class="primary" href="https://www.instagram.com/kazu.nature_soul/" target="_blank" rel="noopener">Instagramで続きを見る</a>
         <button type="button" class="ghost" id="retryBtn">もう一度検査する</button>
       </div>
     </section>
   </main>
-
-  <footer class="note">解説は、運動生理学などの一般的な研究知見をもとにしています。痛みや持病がある場合は、医師や専門家にご相談ください。</footer>
+  <footer class="note">解説は、運動生理学などの研究報告をもとにした一般的な情報です。痛みや持病がある場合は、医師や専門家にご相談ください。</footer>
 </div>
 
 <script>
@@ -458,34 +286,44 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
   var Q = [
     { t: "筋肉痛が来ないなら、その筋トレは効いていない。", a: false, label: "筋肉痛と筋トレ効果",
       h: "痛みは、効果のものさしではない",
-      b: "筋肉痛は、慣れない動きや、筋肉が伸ばされながら力を出す動き（階段を下りる、ダンベルをゆっくり下ろすなど）で起きやすい反応です。同じ運動に慣れると出にくくなりますが、筋肉が育たなくなったわけではありません。効果の目安は痛みより、扱える重さや回数が伸びているかどうかです。" },
+      b: "筋肉痛は、慣れない動きや、筋肉が伸ばされながら力を出す動き（階段を下りる、ダンベルをゆっくり下ろすなど）で起きやすい反応です。同じ運動に慣れると出にくくなりますが、筋肉が育たなくなったわけではありません。効果の目安は痛みより、扱える重さや回数が伸びているかどうかです。",
+      s: "筋肉痛が筋肉の成長の目安になるかを検討したレビュー（2013年）" },
     { t: "汗をたくさんかくほど、脂肪がよく燃えている。", a: false, label: "汗と脂肪燃焼",
       h: "汗は、体温を下げるための水",
-      b: "汗の役割は、蒸発するときに熱を奪って体温を下げることです。汗の量は気温や湿度、体質で大きく変わり、脂肪がどれだけ使われたかとは別の話。サウナや厚着で減った体重はほとんどが水分なので、水を飲めば元に戻ります。" },
+      b: "汗の役割は、蒸発するときに熱を奪って体温を下げることです。汗の量は気温や湿度、体質で大きく変わり、脂肪がどれだけ使われたかとは別の話。サウナや厚着で減った体重はほとんどが水分なので、水を飲めば元に戻ります。",
+      s: "汗による体温調節（気化熱）の生理学" },
     { t: "何歳になっても、筋肉は鍛えれば増える。", a: true, label: "年齢と筋肉",
       h: "筋肉は、何歳でも応えてくれる",
-      b: "90歳前後の人でも、筋トレで筋力や筋肉の量が増えたという研究があります。年齢とともに筋肉は落ちやすくなりますが、刺激に応えて強くなる仕組みそのものは残っています。「もう歳だから」は、身体の仕組みから見ると始めない理由になりません。" },
+      b: "90歳前後の人でも、筋トレで筋力や筋肉の量が増えたという研究があります。年齢とともに筋肉は落ちやすくなりますが、刺激に応えて強くなる仕組みそのものは残っています。「もう歳だから」は、身体の仕組みから見ると始めない理由になりません。",
+      s: "90歳代の高齢者に筋力トレーニングを行った研究（JAMA、1990年）" },
     { t: "腹筋運動をたくさんすれば、お腹の脂肪から落ちていく。", a: false, label: "腹筋と部分痩せ",
       h: "脂肪は、全身から使われる",
-      b: "脂肪がエネルギーとして使われるときは、分解されて血液に乗り、全身から少しずつ動員されます。動かしている場所の脂肪だけが優先して減るわけではありません。腹筋運動で鍛えられるのはお腹の筋肉。お腹の脂肪を減らすのは、全身の消費と食事のバランスです。" },
+      b: "脂肪がエネルギーとして使われるときは、分解されて血液に乗り、全身から少しずつ動員されます。動かしている場所の脂肪だけが優先して減るわけではありません。腹筋運動で鍛えられるのはお腹の筋肉。お腹の脂肪を減らすのは、全身の消費と食事のバランスです。",
+      s: "腹筋運動を6週間続けても、お腹の脂肪は減らなかったという研究（2011年）" },
     { t: "運動前は、時間をかけてじっくり筋肉を伸ばすほどケガを防げる。", a: false, label: "運動前のストレッチ",
       h: "運動前は「伸ばす」より「温める」",
-      b: "運動の直前に1つの筋肉を長く（目安として1分以上）伸ばし続けると、一時的に力を出しにくくなることがわかっています。ケガを防ぐ効果も、はっきりとは示されていません。運動前は、身体を動かしながら温める動的ストレッチが向いています。じっくり伸ばすのは、運動後やお風呂上がりに。" },
+      b: "運動の直前に1つの筋肉を長く（目安として1分以上）伸ばし続けると、一時的に力を出しにくくなることがわかっています。ケガを防ぐ効果も、はっきりとは示されていません。運動前は、身体を動かしながら温める動的ストレッチが向いています。じっくり伸ばすのは、運動後やお風呂上がりに。",
+      s: "運動前の静的ストレッチの影響をまとめたレビュー（2016年）" },
     { t: "吸う息より吐く息を長くすると、身体はリラックスしやすい。", a: true, label: "呼吸とリラックス",
       h: "長く吐くと、ブレーキ役の神経が働く",
-      b: "息を吐いているあいだは、心拍がゆっくりになる方向に自律神経が切り替わります。吐く時間を長くとる呼吸は、身体を休ませる副交感神経が働きやすい状態をつくります。緊張する場面で「ゆっくり長く吐く」のは、仕組みから見ても理にかなっています。" },
+      b: "息を吐いているあいだは、心拍がゆっくりになる方向に自律神経が切り替わります。吐く時間を長くとる呼吸は、身体を休ませる副交感神経が働きやすい状態をつくります。緊張する場面で「ゆっくり長く吐く」のは、仕組みから見ても理にかなっています。",
+      s: "呼吸と心拍・自律神経の関係（呼吸性洞性不整脈）" },
     { t: "指の関節をポキポキ鳴らし続けると、関節炎になる。", a: false, label: "関節を鳴らす癖",
       h: "あの音の正体は、関節の中の気泡",
-      b: "関節は液体の入った袋に包まれています。関節を引き離すと袋の中の圧力が急に下がり、気体の空洞ができる。そのときの音だと考えられています。長年鳴らしてきた人を調べた研究でも、関節炎が増えるという結果は出ていません。ただし痛みや腫れがあるなら話は別なので、専門家に相談を。" },
+      b: "関節は液体の入った袋に包まれています。関節を引き離すと袋の中の圧力が急に下がり、気体の空洞ができる。そのときの音だと考えられています。長年鳴らしてきた人を調べた研究でも、関節炎が増えるという結果は出ていません。ただし痛みや腫れがあるなら話は別なので、専門家に相談を。",
+      s: "関節が鳴る瞬間をMRIで撮影した研究（2015年）、長年の習慣と関節炎の関係を調べた研究" },
     { t: "身体が硬いのは筋肉が短いから。ストレッチは筋肉を長くするためにやる。", a: false, label: "身体の硬さの正体",
       h: "硬さの多くは、神経のブレーキ",
-      b: "ストレッチを続けて柔らかくなる理由の多くは、筋肉が物理的に長くなることより、「ここまで伸ばしても大丈夫」と神経が受け入れる範囲が広がることだと考えられています。身体の硬さは、筋肉の長さだけでなく、脳と神経がかけているブレーキの問題でもあるのです。" },
+      b: "ストレッチを続けて柔らかくなる理由の多くは、筋肉が物理的に長くなることより、「ここまで伸ばしても大丈夫」と神経が受け入れる範囲が広がることだと考えられています。身体の硬さは、筋肉の長さだけでなく、脳と神経がかけているブレーキの問題でもあるのです。",
+      s: "ストレッチで柔らかくなる仕組みを検討した研究（「感覚理論」、2010年）" },
     { t: "毎日運動していても、座っている時間が長いと健康リスクは上がる。", a: true, label: "座りっぱなし",
       h: "運動と「座りすぎ」は別の問題",
-      b: "長時間座り続けることは、運動習慣とは別に健康リスクと関係することが、多くの研究で示されています。運動量がかなり多い人ではその影響が小さくなるという報告もありますが、基本は「運動する」と「座りっぱなしを減らす」は別々の対策。30分〜1時間に一度立ち上がるだけでも違います。" },
+      b: "長時間座り続けることは、運動習慣とは別に健康リスクと関係することが、多くの研究で示されています。運動量がかなり多い人ではその影響が小さくなるという報告もありますが、基本は「運動する」と「座りっぱなしを減らす」は別々の対策。30分〜1時間に一度立ち上がるだけでも違います。",
+      s: "座っている時間・運動量と死亡リスクを100万人以上で解析した研究（Lancet、2016年）" },
     { t: "良い姿勢とは、背筋をまっすぐピンと伸ばした状態のこと。", a: false, label: "良い姿勢",
       h: "背骨は、もともとS字",
-      b: "背骨は、ゆるやかなS字カーブで衝撃を逃がす構造です。まっすぐ伸ばそうと力み続けると、背中の筋肉がずっと緊張したままになります。身体の負担になりやすいのは、悪い姿勢そのものより「同じ姿勢のまま動かないこと」。姿勢は形より、こまめに変えられるかが大事です。" }
+      b: "背骨は、ゆるやかなS字カーブで衝撃を逃がす構造です。まっすぐ伸ばそうと力み続けると、背中の筋肉がずっと緊張したままになります。身体の負担になりやすいのは、悪い姿勢そのものより「同じ姿勢のまま動かないこと」。姿勢は形より、こまめに変えられるかが大事です。",
+      s: "姿勢と腰痛の関係を検討した研究のレビュー" }
   ];
 
   var GRADES = [
@@ -494,7 +332,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
     { max: 6, g: "C", n: "要経過観察" },
     { max: 10, g: "D", n: "要精密検査" }
   ];
-
   var TYPES = [
     { name: "体感信仰タイプ", qs: [0, 1, 4, 6],
       short: "痛み・汗・音を、そのまま効果や危険のサインと受け取りやすい。",
@@ -515,17 +352,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
     tag: "よく聞く話に流されず、身体を仕組みで捉えられています。引っかかりやすい「常識」をほぼ見抜けました。",
     rx: "その目で、まわりの「当たり前」も見直してみる。"
   };
-  var GRADES = [
-    { max: 1, g: "A", n: "異常なし" },
-    { max: 3, g: "B", n: "軽度の思い込み" },
-    { max: 6, g: "C", n: "要経過観察" },
-    { max: 10, g: "D", n: "要精密検査" }
-  ];
 
   var $ = function (id) { return document.getElementById(id); };
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var i = 0, answers = [];
-
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function toTop() { try { window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); } catch (e) { window.scrollTo(0, 0); } }
 
@@ -545,8 +375,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
     }
     return { wrong: wrong, pct: wrong * 10, grade: gr, type: type, flags: flags };
   }
-
-  /* ---------- 画面遷移 ---------- */
   function renderTicks() {
     var ol = $("ticks");
     ol.innerHTML = "";
@@ -582,6 +410,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
     va.appendChild(m);
     $("rHead").textContent = q.h;
     $("rBody").textContent = q.b;
+    var src = $("rSrc");
+    src.textContent = "";
+    var sb = document.createElement("b"); sb.textContent = "根拠"; src.appendChild(sb);
+    src.appendChild(document.createTextNode(q.s));
     $("nextBtn").textContent = i === Q.length - 1 ? "結果を見る" : "次の問題へ";
     $("reveal").hidden = false;
     renderTicks();
@@ -622,7 +454,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
     $("start").hidden = true; $("result").hidden = true; $("quiz").hidden = false;
     renderQ(); toTop();
   }
-
   $("startBtn").addEventListener("click", start);
   $("retryBtn").addEventListener("click", start);
   $("btnMaru").addEventListener("click", function () { answer(true); });
@@ -632,7 +463,6 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-
     if (i < Q.length) { renderQ(); toTop(); try { $("qText").focus({ preventScroll: true }); } catch (e) {} }
     else showResult();
   });
-
 })();
 </script>
 
