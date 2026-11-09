@@ -75,6 +75,9 @@ a:focus-visible { outline: 2px solid var(--terra); outline-offset: 3px; }
 .gate-text .inner { display: flex; flex-direction: column; gap: 14px; }
 .gate-text .inner > * { max-width: 30rem; }
 .eyebrow { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .18em; color: var(--brass); }
+.brandline { display: flex; flex-direction: column; gap: 4px; padding-left: 14px; border-left: 3px solid var(--terra); }
+.lab-name { font-family: var(--mincho); font-weight: 800; font-size: clamp(1.2rem, 5vw, 1.45rem); line-height: 1.3; letter-spacing: .12em; color: var(--ink); }
+.lab-sub { font-size: 13.5px; font-weight: 500; line-height: 1.6; letter-spacing: .02em; color: var(--brass); }
 h1 {
   margin: 0;
   font-family: var(--mincho);
@@ -292,7 +295,10 @@ footer .inner { display: flex; flex-wrap: wrap; justify-content: space-between; 
 <header class="gate" id="top">
   <div class="gate-text gutter">
     <div class="inner">
-      <p class="eyebrow">身体・食・健康・社会の"当たり前"を確かめる、本質追究ラボ</p>
+      <div class="brandline">
+        <span class="lab-name">本質追究ラボ</span>
+        <span class="lab-sub">身体・食・健康・社会の“当たり前”を確かめる場所</span>
+      </div>
       <h1>それ、<br>本当に<em>そう？</em></h1>
       <p class="lead">世間の「当たり前」は、誰にとっての当たり前なのか。よく聞く常識を、仕組みと成り立ちから確かめる場所です。</p>
       <a class="btn" href="#now">展示を見る <span aria-hidden="true">↓</span></a>
