@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}
+.homeback { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 15px 16px; border: 1px solid var(--ink); background: var(--card); color: var(--ink); text-decoration: none; font-weight: 700; font-size: 15px; letter-spacing: .1em; }
+.homeback:hover { border-color: var(--terra); color: var(--terra); }
+.backbar a { padding: 6px 0; }
+</style>
+<title>その眠りの常識、本当？</title>
+<meta name="description" content="よく聞く眠りと暮らしの話を10問。○か×で答えると、あなたの思い込み度と思い込みタイプがわかります。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: 明るい陳列室の「眠りと暮らしの棚」。表紙の絵 → 設問カード → 判定カード（スクショ1枚で完結）。ホームページと同じ色の単一テーマ */
+:root {
+  --paper: #FBF8F2;
+  --card: #FFFFFF;
+  --ink: #2B2A26;
+  --muted: #6B675E;
+  --rule: #E6DFD2;
+  --wash: #F1ECE2;
+  --sage: #6F7F5C;
+  --sage-soft: #E8ECE0;
+  --terra: #B5563A;
+  --terra-soft: #F6E4DD;
+  --brass: #8A6A3E;
+  --mincho: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
+  --body: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.85; -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+.wrap {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+main, section { display: flex; flex-direction: column; gap: 20px; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--terra); outline-offset: 3px; }
+
+/* 表紙 */
+.cover {
+  position: relative;
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  aspect-ratio: 1 / 1;
+  max-width: none;
+  background: var(--wash) url("cover.jpg") center / cover no-repeat;
+}
+.cover::after { content: ""; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(transparent, var(--paper)); }
+.cover .tag {
+  position: absolute;
+  top: 14px;
+  left: max(16px, env(safe-area-inset-left, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .16em;
+  color: var(--ink);
+}
+.cover .tag span { background: rgba(251, 248, 242, .85); padding: 2px 8px; }
+.eyebrow { margin: -6px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: var(--brass); }
+h1 { margin: -8px 0 0; font-family: var(--mincho); font-weight: 800; font-size: clamp(2.3rem, 10.5vw, 3.2rem); line-height: 1.3; letter-spacing: .04em; }
+h1 span { color: var(--terra); }
+.lead { margin: 0; }
+.lead b { color: var(--terra); }
+.scale { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.scale ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; }
+.scale li { display: flex; align-items: center; gap: 10px; padding: 11px 4px; font-size: 14px; }
+.scale li:nth-child(n+3) { border-top: 1px solid var(--rule); }
+.scale .g { flex: none; width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid var(--terra); border-radius: 50%; color: var(--terra); font-family: var(--mincho); font-weight: 800; font-size: 14px; line-height: 1; }
+.byline { margin: 0; font-size: 13px; line-height: 1.7; color: var(--muted); }
+
+.primary, .secondary {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  font: 700 16px/1.3 var(--body);
+  letter-spacing: .14em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.primary { border: 0; background: var(--ink); color: var(--paper); }
+.primary:hover { background: var(--terra); }
+.secondary { border: 1px solid var(--ink); background: transparent; color: var(--ink); }
+.ghost { align-self: center; background: none; border: 0; padding: 8px 12px; color: var(--muted); font: 14px var(--body); text-decoration: underline; cursor: pointer; }
+
+.panel { background: var(--card); border: 1px solid var(--rule); padding: 22px 18px; display: flex; flex-direction: column; gap: 16px; }
+#quiz { margin-top: 20px; }
+.qhead { display: flex; flex-direction: column; gap: 10px; }
+.qno { display: flex; align-items: baseline; gap: 8px; }
+#qNum { font-family: var(--mincho); font-weight: 800; font-size: 28px; line-height: 1; color: var(--terra); }
+.qof { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.ticks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.ticks li { height: 4px; background: var(--wash); }
+.ticks li.cur { background: var(--muted); }
+.ticks li.ok { background: var(--sage); }
+.ticks li.ng { background: var(--terra); }
+.qtext { margin: 0; font-family: var(--mincho); font-weight: 700; font-size: clamp(1.3rem, 5.6vw, 1.5rem); line-height: 1.7; text-wrap: pretty; min-height: 5.1em; }
+.qtext:focus { outline: none; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.choice {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  min-height: 150px; padding: 22px 8px 14px;
+  background: var(--paper); border: 1px solid var(--rule); color: var(--ink); font: inherit; cursor: pointer;
+  transition: border-color .15s, background-color .15s, opacity .2s;
+}
+@media (hover: hover) { .choice:not(:disabled):hover { border-color: var(--muted); } }
+.choice:disabled { cursor: default; }
+.choice.picked { border-color: var(--ink); background: var(--card); }
+.choice.dim { opacity: .3; }
+.mk { position: relative; width: 62px; height: 62px; }
+.mk-maru { box-sizing: border-box; border: 7px solid var(--terra); border-radius: 50%; }
+.mk-batsu::before, .mk-batsu::after { content: ""; position: absolute; left: 50%; top: 50%; width: 80px; height: 7px; background: var(--sage); transform: translate(-50%, -50%) rotate(45deg); }
+.mk-batsu::after { transform: translate(-50%, -50%) rotate(-45deg); }
+.cap { font-size: 14px; font-weight: 700; letter-spacing: .14em; }
+
+.reveal { display: flex; flex-direction: column; gap: 12px; padding-top: 18px; border-top: 1px solid var(--rule); animation: rise .25s ease-out; }
+.verdict { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.stamp { display: inline-block; padding: 2px 12px; border: 1.5px solid currentColor; font-family: var(--mincho); font-weight: 800; font-size: 18px; line-height: 1.5; transform: rotate(-4deg); }
+.stamp.ok { color: var(--sage); background: var(--sage-soft); }
+.stamp.ng { color: var(--terra); background: var(--terra-soft); }
+.vans { font-size: 14px; font-weight: 700; color: var(--muted); }
+.vans .m { font-family: var(--mincho); font-weight: 800; font-size: 20px; margin-left: 6px; color: var(--ink); }
+.rlabel { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--brass); }
+.rhead { margin: -6px 0 0; font-family: var(--mincho); font-weight: 800; font-size: 20px; line-height: 1.5; text-wrap: balance; }
+.rbody { margin: 0; font-size: 15.5px; line-height: 1.95; }
+.src { margin: 0; padding: 10px 12px; background: var(--wash); font-size: 12.5px; line-height: 1.7; color: var(--muted); }
+.src b { color: var(--brass); margin-right: 6px; }
+
+/* 結果カード */
+#result { margin-top: 20px; }
+.rcard { background: var(--card); border: 1px solid var(--rule); display: flex; flex-direction: column; }
+.rcard .pic { aspect-ratio: 16 / 9; max-width: 100%; background: var(--wash) url("cover.jpg") center 40% / cover no-repeat; position: relative; }
+.rcard .pic span { position: absolute; top: 10px; left: 12px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; background: rgba(251, 248, 242, .88); padding: 2px 8px; }
+.rcard .in { padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+.card-top { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--brass); }
+.card-top::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+.card-main { display: flex; align-items: center; gap: 18px; }
+.gstamp { flex: none; width: 80px; height: 80px; box-sizing: border-box; display: grid; place-items: center; border: 3px solid var(--terra); border-radius: 50%; box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px var(--terra); color: var(--terra); transform: rotate(-8deg); }
+.gstamp.press { animation: press .45s cubic-bezier(.2, .8, .3, 1.2); }
+.gstamp .gl { font-family: var(--mincho); font-weight: 800; font-size: 40px; line-height: 1; }
+.judge { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.slabel { font-size: 12px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
+.gname { font-family: var(--mincho); font-weight: 800; font-size: 22px; line-height: 1.35; color: var(--terra); }
+.score { display: flex; flex-direction: column; gap: 6px; }
+.score-num { font-family: var(--mincho); font-weight: 800; font-size: 54px; line-height: 1; font-variant-numeric: tabular-nums; }
+.score-num small { font-size: 22px; margin-left: 4px; }
+.meter { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; max-width: 280px; }
+.meter span { height: 6px; background: var(--wash); }
+.meter span.on { background: var(--terra); }
+.tname { font-family: var(--mincho); font-weight: 800; font-size: clamp(1.6rem, 7.4vw, 2rem); line-height: 1.35; }
+.tshort { margin: 2px 0 0; font-size: 14.5px; line-height: 1.8; color: var(--muted); }
+.rfoot { display: flex; flex-direction: column; gap: 2px; padding-top: 12px; border-top: 1px solid var(--rule); }
+.rtitle { font-family: var(--mincho); font-weight: 800; font-size: 16px; }
+.rhandle { font-size: 12px; color: var(--muted); }
+.rhandle b { font-family: var(--mono); font-weight: 500; color: var(--terra); }
+.ask { margin: 0; text-align: center; font-family: var(--mincho); font-weight: 700; font-size: 18px; line-height: 1.6; }
+
+.sec-h { margin: 0; font-family: var(--mincho); font-weight: 800; font-size: 19px; line-height: 1.5; }
+.rx { margin: 0; padding-left: 12px; border-left: 2px solid var(--terra); font-size: 15px; line-height: 1.8; }
+.rx b { display: block; font-size: 12px; letter-spacing: .16em; color: var(--terra); }
+.items { list-style: none; margin: 0; padding: 0; }
+.items li { display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: 12px; padding: 11px 0; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.6; }
+.items li:first-child { border-top: 0; padding-top: 0; }
+.items .no { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
+.items .lb { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.items .find { font-size: 13px; color: var(--brass); }
+.pill { padding: 1px 10px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.pill.ok { color: var(--sage); background: var(--sage-soft); }
+.pill.ng { color: var(--terra); background: var(--terra-soft); }
+.cta p { margin: 0; }
+.note { font-size: 12px; line-height: 1.7; color: var(--muted); }
+
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes press { from { opacity: 0; transform: rotate(-8deg) scale(1.4); } to { opacity: 1; transform: rotate(-8deg) scale(1); } }
+@media (prefers-reduced-motion: reduce) { .reveal, .gstamp.press { animation: none; } .choice, .primary { transition: none; } }
+@media (min-width: 560px) {
+  .cover { margin: 16px 0 0; }
+  .panel { padding: 26px; }
+  .scale ul { grid-template-columns: repeat(4, 1fr); }
+  .scale li { flex-direction: column; text-align: center; gap: 6px; font-size: 13px; }
+  .scale li:nth-child(n+3) { border-top: 0; }
+}
+
+.backbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 12px; font-size: 13px; }
+.backbar a { color: var(--muted); text-decoration: none; font-weight: 700; letter-spacing: .06em; }
+.backbar a:hover { color: var(--terra); }
+.backbar span { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--brass); }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <nav class="backbar" aria-label="サイト内の移動"><a href="../room3/index.html">← 眠りと暮らしの部屋へ</a><span>ROOM 3 ／ 眠りと暮らし</span></nav>
+  <main>
+    <section id="start">
+      <div class="cover"><div class="tag"><span>ROOM 3 ／ SLEEP</span><span>10 Q</span></div></div>
+      <p class="eyebrow">全10問 ・ 約3分 ・ ○×で答えるだけ</p>
+      <h1>その眠りの常識、<br><span>本当？</span></h1>
+      <p class="lead">毎晩の眠りと暮らしにまつわる「よく聞く話」を10個集めました。○か×で答えると、あなたの<b>思い込み度</b>と<b>思い込みタイプ</b>がわかります。1問ごとに、仕組みの解説と根拠つき。</p>
+      <div class="scale" aria-label="判定区分">
+        <ul>
+          <li><span class="g">A</span>異常なし</li>
+          <li><span class="g">B</span>軽度の思い込み</li>
+          <li><span class="g">C</span>要経過観察</li>
+          <li><span class="g">D</span>要精密検査</li>
+        </ul>
+      </div>
+      <button type="button" id="startBtn" class="primary">検査をはじめる</button>
+      <p class="byline">作成：Kazu.Ouchi ｜ 魂の構造探究者</p>
+    </section>
+
+    <section id="quiz" class="panel" hidden>
+      <div class="qhead">
+        <div class="qno"><span id="qNum">Q.01</span><span class="qof">/ 10</span></div>
+        <ol class="ticks" id="ticks" aria-hidden="true"></ol>
+      </div>
+      <p class="qtext" id="qText" tabindex="-1"></p>
+      <div class="choices">
+        <button type="button" class="choice" id="btnMaru" aria-label="○ そのとおり"><span class="mk mk-maru" aria-hidden="true"></span><span class="cap">そのとおり</span></button>
+        <button type="button" class="choice" id="btnBatsu" aria-label="× ちがう"><span class="mk mk-batsu" aria-hidden="true"></span><span class="cap">ちがう</span></button>
+      </div>
+      <div id="reveal" class="reveal" hidden aria-live="polite">
+        <div class="verdict"><span class="stamp" id="vStamp">正解</span><span class="vans" id="vAns"></span></div>
+        <p class="rlabel">MECHANISM ／ 仕組み</p>
+        <h2 class="rhead" id="rHead"></h2>
+        <p class="rbody" id="rBody"></p>
+        <p class="src" id="rSrc"></p>
+        <button type="button" class="primary" id="nextBtn">次の問題へ</button>
+      </div>
+    </section>
+
+    <section id="result" hidden>
+      <div class="rcard">
+        <div class="pic"><span>SLEEP MYTHS ／ RESULT</span></div>
+        <div class="in">
+          <div class="card-top"><span>検査結果</span></div>
+          <div class="card-main">
+            <div class="gstamp" id="gStamp"><span class="gl" id="gLetter">A</span></div>
+            <div class="judge"><span class="slabel">判定</span><span class="gname" id="gName">異常なし</span></div>
+          </div>
+          <div class="score">
+            <span class="slabel">思い込み度</span>
+            <div class="score-num"><span id="pct">0</span><small>%</small></div>
+            <div class="meter" id="meter" aria-hidden="true"></div>
+          </div>
+          <div>
+            <span class="slabel">あなたは</span>
+            <div class="tname" id="tName"></div>
+            <p class="tshort" id="tShort"></p>
+          </div>
+          <div class="rfoot"><span class="rtitle">その眠りの常識、本当？</span><span class="rhandle">診断は <b>@kazu.nature_soul</b> のプロフィールから</span></div>
+        </div>
+      </div>
+      <p class="ask">家族や友だちは、何問見抜けるだろう？</p>
+
+      <div class="panel">
+        <h2 class="sec-h">所見と処方</h2>
+        <p id="tTag" style="margin:0"></p>
+        <p class="rx"><b>処方</b><span id="tRx"></span></p>
+        <ol class="items" id="items"></ol>
+      </div>
+
+      <div class="panel cta">
+        <h2 class="sec-h">なぜ、そうなるのか</h2>
+        <p>身体・食・健康の「当たり前」を、仕組みから掘り下げて発信しています。続きはInstagramで。</p>
+        <a class="primary" href="https://www.instagram.com/kazu.nature_soul/" target="_blank" rel="noopener">Instagramで続きを見る</a>
+        <button type="button" class="ghost" id="retryBtn">もう一度検査する</button>
+      </div>
+    </section>
+  </main>
+  <a class="homeback" href="../room3/index.html">← 眠りと暮らしの部屋へ戻る</a>
+  <a class="homeback" href="../index.html" style="border-color:var(--rule);font-weight:500">陳列室の入口へ</a>
+  <footer class="note">解説は、公的機関の資料や研究報告をもとにした一般的な情報です。眠りの悩みが続く場合や、持病がある場合は、医師にご相談ください。</footer>
+</div>
+
+<script>
+(function () {
+  var Q = [
+    { t: "睡眠は、8時間とらないと健康に悪い。", a: false, label: "睡眠は8時間",
+      h: "必要な睡眠時間は、人によって違う",
+      b: "「8時間」はよく聞く数字ですが、全員に当てはまる決まりではありません。必要な睡眠時間は、年齢や体質、日中の活動量で変わります。国のガイドでも、成人は6時間以上を目安としつつ、時間より「日中に眠気で困っていないか」「目覚めたときに休まった感じがあるか」を大事にするよう示しています。",
+      s: "厚生労働省「健康づくりのための睡眠ガイド2023」" },
+    { t: "平日の睡眠不足は、休日に寝だめすれば取り戻せる。", a: false, label: "休日の寝だめ",
+      h: "寝だめでは、取り戻しきれない",
+      b: "休日に長く寝ると眠気は少し回復しますが、睡眠不足による身体への影響まで元に戻るわけではないことが、研究で示されています。さらに休日に起きる時間が大きくずれると、体内時計がずれて、月曜の朝に時差ぼけのような状態になります。",
+      s: "週末の寝だめで、平日の睡眠不足の影響が戻るかを調べた研究（2019年）" },
+    { t: "朝に日光を浴びると、夜に眠くなる時間が整いやすい。", a: true, label: "朝の光",
+      h: "朝の光が、夜の眠気のスイッチになる",
+      b: "朝に強い光を浴びると、体内時計がリセットされます。そこからおよそ14〜16時間後に、眠気をもたらすメラトニンというホルモンが出やすくなります。夜に眠れない人ほど、実は朝の過ごし方がカギになっていることがあります。",
+      s: "光と体内時計（メラトニン）に関する研究／厚生労働省「健康づくりのための睡眠ガイド2023」" },
+    { t: "寝る前にお酒を飲むと、眠りが深くなる。", a: false, label: "寝る前のお酒",
+      h: "寝つきは早くても、後半が浅くなる",
+      b: "お酒を飲むと寝つきは早くなりやすい一方で、アルコールが分解される夜の後半に眠りが浅くなり、目が覚めやすくなります。トイレも近くなります。「よく眠れた気がする」と「深く眠れた」は、別のものです。",
+      s: "寝る前の飲酒と睡眠の関係をまとめたレビュー（2013年）" },
+    { t: "寝る直前に熱いお風呂に入ると、ぐっすり眠れる。", a: false, label: "寝る直前のお風呂",
+      h: "お風呂は、寝る1〜2時間前がちょうどいい",
+      b: "人は、身体の内側の温度が下がっていくときに眠くなります。入浴で一度上がった体温が下がるまでには時間がかかるため、寝る直前の熱いお風呂は、かえって目がさえることがあります。研究では、寝る1〜2時間前に入浴を済ませると、寝つきが早くなりやすいと報告されています。",
+      s: "入浴のタイミングと寝つきの関係をまとめたメタ解析（2019年）" },
+    { t: "短い昼寝は、午後の眠気や集中力の回復に役立つ。", a: true, label: "短い昼寝",
+      h: "昼寝は、短ければ味方になる",
+      b: "午後の早い時間に、30分以内の短い昼寝をとると、眠気がとれて集中力が戻りやすくなります。ただし、長く寝すぎたり夕方に寝たりすると、夜の眠りに響くことがあります。「短く、早めに」がコツです。",
+      s: "厚生労働省「健康づくりのための睡眠ガイド2023」" },
+    { t: "スマホのブルーライトさえカットすれば、寝る前にスマホを見ても睡眠に影響しない。", a: false, label: "寝る前のスマホ",
+      h: "問題は、光だけではない",
+      b: "スマホの夜間モードなどで光を抑えても、睡眠が良くなったとは言えないという研究があります。動画やSNSで脳が興奮すること、つい見続けて寝る時間が遅れることの影響も大きいからです。光を減らすより、寝る前にスマホから離れる時間を作るほうが効果的です。",
+      s: "スマホの夜間モードと睡眠の関係を調べた研究（2021年）" },
+    { t: "寝るときに部屋の電気を少しつけておいても、身体への影響はない。", a: false, label: "寝るときの明かり",
+      h: "眠っていても、身体は光に反応している",
+      b: "寝ている間に部屋を明るくしておくと、眠っていても心拍が上がり、翌朝の血糖の反応が悪くなったという研究があります。目を閉じていても、まぶた越しに光は届いています。足元灯など、必要な明かりはできるだけ低い位置で、暗めにするのがおすすめです。",
+      s: "寝ている間の照明と、心拍・血糖の反応を調べた研究（PNAS、2022年）" },
+    { t: "年齢を重ねると、若い頃より眠りが浅く短くなるのは自然な変化だ。", a: true, label: "年齢と眠り",
+      h: "眠りも、年齢とともに変わる",
+      b: "年齢とともに、深い眠りは減り、夜中に目が覚めやすくなり、朝早く目覚めるようになります。これは自然な変化です。若い頃と同じ時間眠ろうとして長く床にいると、かえって眠りが浅くなることがあるため、国のガイドでも、高齢の人は寝床にいる時間を長くしすぎないよう示しています。",
+      s: "厚生労働省「健康づくりのための睡眠ガイド2023」" },
+    { t: "いびきをかいているのは、よく眠れている証拠だ。", a: false, label: "いびき",
+      h: "いびきは、空気の通り道が狭いサイン",
+      b: "いびきは、寝ている間に喉の空気の通り道が狭くなり、そこを空気が通るときの振動の音です。大きないびきや、いびきが止まって呼吸が途切れる様子がある場合は、睡眠時無呼吸症候群の可能性もあります。日中に強い眠気があるなら、一度医療機関で相談を。",
+      s: "いびきと睡眠時無呼吸症候群に関する医学的知見" }
+  ];
+
+  var GRADES = [
+    { max: 1, g: "A", n: "異常なし" },
+    { max: 3, g: "B", n: "軽度の思い込み" },
+    { max: 6, g: "C", n: "要経過観察" },
+    { max: 10, g: "D", n: "要精密検査" }
+  ];
+  var TYPES = [
+    { name: "時間信仰タイプ", qs: [0, 1, 8],
+      short: "眠りの良し悪しを、寝た時間の長さで判断しやすい。",
+      tag: "「8時間寝なきゃ」「寝だめで取り戻す」など、眠りを時間の長さで考えやすい傾向が出ています。必要な眠りは、人や年齢によって違います。",
+      rx: "時間より、日中の眠気や目覚めたときの感じで判断する。" },
+    { name: "リラックス信仰タイプ", qs: [3, 4, 7],
+      short: "「くつろげば眠れる」と考えやすい。",
+      tag: "寝る前のお酒、熱いお風呂、ほんのり明るい部屋など、「くつろげること」を眠りに良いことだと考えやすい傾向が出ています。気持ちいいことと、身体が眠りやすいことは別です。",
+      rx: "くつろぐタイミングを、寝る1〜2時間前にずらしてみる。" },
+    { name: "見落としタイプ", qs: [2, 5, 6, 9],
+      short: "眠りが、夜以外の過ごし方で決まることを見落としやすい。",
+      tag: "朝の光、昼寝の仕方、寝る前のスマホ、いびきのサインなど、夜の布団の外にある要因を見落としやすい傾向が出ています。眠りは、朝から始まっています。",
+      rx: "夜の対策より先に、朝の光と寝る前の1時間を見直す。" }
+  ];
+  var MASTER = {
+    name: "眠りの構造探究者タイプ",
+    short: "よく聞く話に流されず、眠りを仕組みで捉えられている。",
+    tag: "時間やイメージに流されず、眠りを身体の仕組みで捉えられています。引っかかりやすい「眠りの常識」をほぼ見抜けました。",
+    rx: "その目で、家族の眠りの悩みにも付き合ってみる。"
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var i = 0, answers = [];
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function toTop() { try { window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); } catch (e) { window.scrollTo(0, 0); } }
+
+  function computeResult() {
+    var flags = Q.map(function (q, k) { return answers[k] !== q.a; });
+    var wrong = flags.filter(Boolean).length;
+    var gr = GRADES.filter(function (g) { return wrong <= g.max; })[0];
+    var type = MASTER;
+    if (wrong > 1) {
+      var best = null;
+      TYPES.forEach(function (t) {
+        var c = t.qs.filter(function (k) { return flags[k]; }).length;
+        var r = c / t.qs.length;
+        if (!best || r > best.r || (r === best.r && c > best.c)) best = { t: t, r: r, c: c };
+      });
+      type = best.t;
+    }
+    return { wrong: wrong, pct: wrong * 10, grade: gr, type: type, flags: flags };
+  }
+  function renderTicks() {
+    var ol = $("ticks");
+    ol.innerHTML = "";
+    for (var k = 0; k < Q.length; k++) {
+      var li = document.createElement("li");
+      if (k < answers.length) li.className = answers[k] === Q[k].a ? "ok" : "ng";
+      else if (k === i) li.className = "cur";
+      ol.appendChild(li);
+    }
+  }
+  function renderQ() {
+    $("qNum").textContent = "Q." + pad(i + 1);
+    $("qText").textContent = Q[i].t;
+    [$("btnMaru"), $("btnBatsu")].forEach(function (b) { b.disabled = false; b.classList.remove("picked", "dim"); });
+    $("reveal").hidden = true;
+    renderTicks();
+  }
+  function answer(v) {
+    if (answers.length > i) return;
+    var q = Q[i];
+    answers.push(v);
+    var picked = v ? $("btnMaru") : $("btnBatsu"), other = v ? $("btnBatsu") : $("btnMaru");
+    picked.classList.add("picked"); other.classList.add("dim");
+    picked.disabled = true; other.disabled = true;
+    var ok = v === q.a, st = $("vStamp");
+    st.textContent = ok ? "正解" : "思い込み";
+    st.className = "stamp " + (ok ? "ok" : "ng");
+    var va = $("vAns");
+    va.textContent = "正解は";
+    var m = document.createElement("span");
+    m.className = "m";
+    m.textContent = q.a ? "○" : "×";
+    va.appendChild(m);
+    $("rHead").textContent = q.h;
+    $("rBody").textContent = q.b;
+    var src = $("rSrc");
+    src.textContent = "";
+    var sb = document.createElement("b"); sb.textContent = "根拠"; src.appendChild(sb);
+    src.appendChild(document.createTextNode(q.s));
+    $("nextBtn").textContent = i === Q.length - 1 ? "結果を見る" : "次の問題へ";
+    $("reveal").hidden = false;
+    renderTicks();
+    try { $("reveal").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); } catch (e) {}
+  }
+  function showResult() {
+    var res = computeResult();
+    window.kzTrack && window.kzTrack("sleep-quiz-finish-" + res.grade.g, "クイズ完走（sleep） " + res.grade.g + "判定 / " + res.type.name);
+    $("gLetter").textContent = res.grade.g;
+    $("gName").textContent = res.grade.n;
+    $("pct").textContent = res.pct;
+    $("tName").textContent = res.type.name;
+    $("tShort").textContent = res.type.short;
+    $("tTag").textContent = res.type.tag;
+    $("tRx").textContent = res.type.rx;
+    var meter = $("meter");
+    meter.innerHTML = "";
+    for (var j = 0; j < 10; j++) { var s = document.createElement("span"); if (j < res.wrong) s.className = "on"; meter.appendChild(s); }
+    var items = $("items");
+    items.innerHTML = "";
+    Q.forEach(function (q, k) {
+      var ng = res.flags[k], li = document.createElement("li");
+      var no = document.createElement("span"); no.className = "no"; no.textContent = "Q." + pad(k + 1);
+      var lb = document.createElement("span"); lb.className = "lb";
+      var t1 = document.createElement("span"); t1.textContent = q.label; lb.appendChild(t1);
+      if (ng) { var t2 = document.createElement("span"); t2.className = "find"; t2.textContent = q.h; lb.appendChild(t2); }
+      var pl = document.createElement("span"); pl.className = "pill " + (ng ? "ng" : "ok"); pl.textContent = ng ? "思い込み" : "正解";
+      li.appendChild(no); li.appendChild(lb); li.appendChild(pl);
+      items.appendChild(li);
+    });
+    $("quiz").hidden = true;
+    $("result").hidden = false;
+    var stamp = $("gStamp");
+    stamp.classList.remove("press"); void stamp.offsetWidth; stamp.classList.add("press");
+    toTop();
+  }
+  function start() {
+    window.kzTrack && window.kzTrack("sleep-quiz-start", "クイズ開始（sleep）");
+    i = 0; answers = [];
+    $("start").hidden = true; $("result").hidden = true; $("quiz").hidden = false;
+    renderQ(); toTop();
+  }
+  $("startBtn").addEventListener("click", start);
+  $("retryBtn").addEventListener("click", start);
+  $("btnMaru").addEventListener("click", function () { answer(true); });
+  $("btnBatsu").addEventListener("click", function () { answer(false); });
+  $("nextBtn").addEventListener("click", function () {
+    i++;
+    if (i < Q.length) { renderQ(); toTop(); try { $("qText").focus({ preventScroll: true }); } catch (e) {} }
+    else showResult();
+  });
+})();
+</script>
+
+<script>
+(function () {
+  try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
+  function top() { if (!location.hash) window.scrollTo(0, 0); }
+  top();
+  window.addEventListener("load", top);
+  window.addEventListener("pageshow", top);
+})();
+</script>
+<script>
+window.kzTrack = function (path, title) {
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true }); } catch (e) {}
+};
+</script>
+<script data-goatcounter="https://kazu-ouchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

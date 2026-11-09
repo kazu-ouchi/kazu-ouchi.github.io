@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}
+.homeback { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 15px 16px; border: 1px solid var(--ink); background: var(--card); color: var(--ink); text-decoration: none; font-weight: 700; font-size: 15px; letter-spacing: .1em; }
+.homeback:hover { border-color: var(--terra); color: var(--terra); }
+.backbar a { padding: 6px 0; }
+</style>
+<title>1日3食は、いつから？</title>
+<meta name="description" content="「1日3食」は、身体の当たり前？ それとも時代の当たり前？ 始まりと、得をしたのは誰かをたどる展示。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: 社会の裏側の部屋・展示01。絵 → 問いかけ（1タップ）→ 年表 → 俗説の検証 → 得をしたのは誰か → 問い返し → 出典。根拠の確かさを札（バッジ）で示す。明るい陳列室の単一テーマ */
+:root {
+  --paper: #FBF8F2;
+  --card: #FFFFFF;
+  --ink: #2B2A26;
+  --muted: #6B675E;
+  --rule: #E6DFD2;
+  --wash: #F1ECE2;
+  --slate: #3F5466;
+  --slate-soft: #E3E9EE;
+  --sage: #6F7F5C;
+  --sage-soft: #E8ECE0;
+  --terra: #B5563A;
+  --terra-soft: #F6E4DD;
+  --brass: #8A6A3E;
+  --brass-soft: #F2EADB;
+  --mincho: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
+  --body: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.9; -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+a { color: inherit; }
+button:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--terra); outline-offset: 3px; }
+.wrap {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding-left: max(18px, env(safe-area-inset-left, 0px));
+  padding-right: max(18px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+section { display: flex; flex-direction: column; gap: 16px; }
+
+/* 入口 */
+.hero {
+  margin-left: calc(-1 * max(18px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(18px, env(safe-area-inset-right, 0px)));
+  position: relative;
+  aspect-ratio: 3 / 2;
+  max-width: none;
+  background: var(--wash) url("hero.jpg") center / cover no-repeat;
+}
+.hero .tag {
+  position: absolute;
+  top: 14px;
+  left: max(18px, env(safe-area-inset-left, 0px));
+  right: max(18px, env(safe-area-inset-right, 0px));
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+}
+.hero .tag span { background: rgba(251, 248, 242, .88); padding: 2px 8px; }
+.head { gap: 12px; margin-top: -32px; }
+.eyebrow { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: var(--brass); }
+h1 { margin: 0; font-family: var(--mincho); font-weight: 800; font-size: clamp(2.3rem, 10vw, 3.4rem); line-height: 1.25; letter-spacing: .04em; }
+h1 span { color: var(--terra); }
+.lead { margin: 0; font-size: 16.5px; }
+
+/* 札の凡例 */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 0; padding: 12px 14px; list-style: none; background: var(--card); border: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
+.legend li { display: flex; align-items: center; gap: 6px; }
+.badge { display: inline-block; padding: 1px 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; white-space: nowrap; }
+.b-rec { background: var(--sage-soft); color: var(--sage); }
+.b-var { background: var(--brass-soft); color: var(--brass); }
+.b-myth { background: var(--terra-soft); color: var(--terra); }
+.b-view { background: var(--slate-soft); color: var(--slate); }
+
+/* 問いかけ */
+.ask { background: var(--card); border: 1px solid var(--rule); padding: 22px 18px; display: flex; flex-direction: column; gap: 14px; }
+.ask .k { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--brass); }
+.ask p.q { margin: 0; font-family: var(--mincho); font-weight: 800; font-size: clamp(1.3rem, 5.6vw, 1.55rem); line-height: 1.6; }
+.pick { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pick button {
+  padding: 14px 8px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font: 700 15px/1.3 var(--body);
+  letter-spacing: .1em;
+  cursor: pointer;
+}
+.pick button:hover { border-color: var(--muted); }
+.pick button[aria-pressed="true"] { border-color: var(--ink); background: var(--card); }
+.pick button:disabled { cursor: default; }
+.answer { padding-top: 14px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 6px; animation: rise .25s ease-out; }
+.answer b { font-family: var(--mincho); font-size: 19px; color: var(--terra); }
+.answer p { margin: 0; }
+
+/* 見出し */
+.sh { display: flex; flex-direction: column; gap: 4px; }
+.sh .en { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; color: var(--brass); }
+h2 { margin: 0; font-family: var(--mincho); font-weight: 800; font-size: clamp(1.6rem, 6vw, 2.1rem); line-height: 1.4; text-wrap: balance; }
+.sh p { margin: 4px 0 0; color: var(--muted); }
+
+/* 年表 */
+.tl { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--rule); margin-left: 6px; }
+.tl li { position: relative; padding: 0 0 26px 22px; display: flex; flex-direction: column; gap: 4px; }
+.tl li::before { content: ""; position: absolute; left: -6px; top: .55em; width: 11px; height: 11px; border-radius: 50%; background: var(--paper); border: 2px solid var(--brass); }
+.tl li.turn::before { background: var(--terra); border-color: var(--terra); }
+.tl .when { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12.5px; color: var(--brass); }
+.tl .what { font-family: var(--mincho); font-weight: 800; font-size: 19px; line-height: 1.5; }
+.tl p { margin: 0; font-size: 15px; line-height: 1.9; }
+
+/* 俗説の検証 */
+.myth { background: var(--card); border: 1px solid var(--rule); }
+.myth summary { list-style: none; cursor: pointer; padding: 20px 18px; display: flex; flex-direction: column; gap: 8px; }
+.myth summary::-webkit-details-marker { display: none; }
+.myth .claim { font-family: var(--mincho); font-weight: 800; font-size: 19px; line-height: 1.6; }
+.myth .open { font-size: 14px; font-weight: 700; color: var(--terra); }
+.myth[open] .open { display: none; }
+.myth .check { padding: 0 18px 20px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--rule); padding-top: 16px; }
+.myth .check p { margin: 0; font-size: 15px; }
+.myth .check ol { margin: 0; padding-left: 1.3em; font-size: 15px; display: flex; flex-direction: column; gap: 6px; }
+.verdict { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 12px; background: var(--terra-soft); }
+.verdict b { font-family: var(--mincho); font-size: 18px; color: var(--terra); }
+
+/* 前と後 */
+.ba { display: grid; grid-template-columns: 1fr; gap: 8px; align-items: stretch; }
+.ba > div:not(.arrow) { padding: 16px; border: 1px solid var(--rule); min-width: 0; }
+.ba .before { background: var(--wash); }
+.ba .after { background: var(--card); border-color: var(--ink); }
+.ba .lab { display: block; font-family: var(--mincho); font-weight: 800; font-size: 17px; margin-bottom: 6px; }
+.ba ul { margin: 0; padding-left: 1.2em; font-size: 14.5px; line-height: 1.85; }
+.ba .arrow { text-align: center; font-size: 22px; color: var(--terra); line-height: 1; transform: rotate(90deg); }
+.plain { margin: 0; font-size: 15px; }
+.plain .badge { margin-right: 6px; }
+@media (min-width: 640px) {
+  .ba { grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .ba .arrow { transform: none; }
+}
+
+/* 得をしたのは誰か */
+.who { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.who > div { background: var(--card); border: 1px solid var(--rule); padding: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.who b { font-family: var(--mincho); font-weight: 800; font-size: 18px; }
+.who p { margin: 0; font-size: 14.5px; line-height: 1.85; color: var(--muted); }
+@media (min-width: 640px) { .who { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* 問い返し */
+.close { background: var(--ink); color: var(--paper); padding: 30px 22px; display: flex; flex-direction: column; gap: 12px; }
+.close .k { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; color: #CDBB98; }
+.close p { margin: 0; }
+.close .big { font-family: var(--mincho); font-weight: 800; font-size: clamp(1.45rem, 6vw, 1.9rem); line-height: 1.6; }
+
+/* 出典 */
+.src { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; line-height: 1.7; }
+.src li { padding-left: 14px; border-left: 2px solid var(--rule); color: var(--muted); }
+.src a { color: var(--ink); text-underline-offset: 3px; overflow-wrap: anywhere; }
+
+.next { display: flex; flex-direction: column; gap: 10px; }
+.btn { display: block; padding: 16px; background: var(--ink); color: var(--paper); text-align: center; text-decoration: none; font-weight: 700; letter-spacing: .12em; }
+.btn:hover { background: var(--terra); }
+.soon { padding: 14px 16px; border: 1px dashed var(--rule); font-size: 14px; color: var(--muted); }
+.soon b { color: var(--ink); }
+.note { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .answer { animation: none; } }
+@media (min-width: 640px) {
+  .hero { margin: 16px 0 0; }
+  .head { margin-top: -20px; }
+}
+
+.backbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 12px; font-size: 13px; }
+.backbar a { color: var(--muted); text-decoration: none; font-weight: 700; letter-spacing: .06em; }
+.backbar a:hover { color: var(--terra); }
+a.soon { display: block; text-decoration: none; color: var(--muted); }
+a.soon:hover { border-color: var(--terra); }
+.backbar span { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--brass); }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <nav class="backbar" aria-label="サイト内の移動"><a href="../room4/index.html">← 社会の裏側の部屋へ</a><span>ROOM 4 ／ 社会の裏側</span></nav>
+  <header>
+    <div class="hero" role="img" aria-label="お膳、古い時計、昔のトースター、現代の皿が年表のように並ぶ展示台">
+      <div class="tag"><span>ROOM 4 ／ 社会の裏側</span><span>展示 01</span></div>
+    </div>
+  </header>
+
+  <section class="head">
+    <p class="eyebrow">当たり前の、成り立ちをたどる</p>
+    <h1>1日3食は、<br><span>いつから？</span></h1>
+    <p class="lead">朝・昼・晩の3回食べる。それは、身体が決めた当たり前？ それとも、時代が決めた当たり前？ 始まりをたどってみます。</p>
+    <ul class="legend" aria-label="札の見方">
+      <li><span class="badge b-rec">記録あり</span>資料で確かめられること</li>
+      <li><span class="badge b-var">諸説あり</span>有力だが説のひとつ</li>
+      <li><span class="badge b-myth">俗説</span>根拠が見つからない話</li>
+      <li><span class="badge b-view">考察</span>案内人の見方</li>
+    </ul>
+  </section>
+
+  <section class="ask" aria-labelledby="askq">
+    <span class="k">まずは、ひと問い</span>
+    <p class="q" id="askq">日本人は、昔から1日3食だった？</p>
+    <div class="pick">
+      <button type="button" id="yes" aria-pressed="false">○ そうだと思う</button>
+      <button type="button" id="no" aria-pressed="false">× ちがうと思う</button>
+    </div>
+    <div class="answer" id="ans" hidden aria-live="polite">
+      <b id="ansHead"></b>
+      <p>江戸時代の中ごろまでは、身分に関係なく<strong>1日2食</strong>がふつうだったと言われています。3食が広まったのは、今からおよそ300年前のことです。</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh">
+      <span class="en">TIMELINE</span>
+      <h2>当たり前が、できるまで</h2>
+    </div>
+    <ol class="tl">
+      <li>
+        <span class="when">江戸時代の中ごろまで <span class="badge b-rec">記録あり</span></span>
+        <span class="what">1日2食がふつうだった</span>
+        <p>食事は朝と夕方の2回。農林水産省の資料でも、3食になったのは江戸時代の中ごろとされています。</p>
+      </li>
+      <li class="turn">
+        <span class="when">1657年 明暦の大火のあと <span class="badge b-var">諸説あり</span></span>
+        <span class="what">職人に、昼にも食事を出した</span>
+        <p>江戸の大半が焼けた大火の復興で、全国から大工や左官が集まりました。力仕事で2食ではもたず、昼にも食事を出したことが広まるきっかけになった、という説があります。屋台や飯屋が増え、外で食べる文化も育ちました。</p>
+      </li>
+      <li class="turn">
+        <span class="when">江戸時代中期（元禄のころ） <span class="badge b-var">諸説あり</span></span>
+        <span class="what">夜が長くなり、3食が広まった</span>
+        <p>灯りに使う菜種油が手に入りやすくなり、夜まで起きて働いたり遊んだりする時間が延びました。起きている時間が長くなれば、お腹もすく。そうして3食が定着していった、と言われています。</p>
+      </li>
+      <li>
+        <span class="when">19世紀 イギリス・アメリカ <span class="badge b-rec">記録あり</span></span>
+        <span class="what">工場と学校の時間割が、食事を決めた</span>
+        <p>欧米でも、もともとメインの食事は昼ごろで、夜は軽く済ませるのがふつうでした。工場や学校に通う人が増えると、昼に家へ帰って食べられなくなり、昼食が独立し、夕食がメインに変わっていきました。</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sh">
+      <span class="en">MYTH CHECK</span>
+      <h2>よく聞く話を、確かめる</h2>
+      <p>ネットでよく見かける、こんな話があります。</p>
+    </div>
+    <details class="myth">
+      <summary>
+        <span class="badge b-myth" style="align-self:flex-start">検証する話</span>
+        <span class="claim">「エジソンが、トースターを売るために1日3食を広めた」</span>
+        <span class="open">タップして検証を見る ↓</span>
+      </summary>
+      <div class="check">
+        <p>調べてみると、次のことがわかりました。</p>
+        <ol>
+          <li>最初の電気トースターとして知られるのは、1893年、イギリスのクロンプトン社のものです。エジソンが発明したという記録は見当たりません。</li>
+          <li>エジソンが「1日3食をとるべきだ」とすすめたという発言も、確かな出典は確認できませんでした。</li>
+          <li>そもそも欧米では、それより前から、働き方の変化で昼食が独立しつつありました。</li>
+        </ol>
+        <div class="verdict"><span class="badge b-myth">判定</span><b>根拠の見つからない俗説</b></div>
+        <p>「当たり前を疑う話」そのものが、作られた話のこともあります。疑うときこそ、出典までたどるのが大事です。</p>
+      </div>
+    </details>
+  </section>
+
+  <section>
+    <div class="sh">
+      <span class="en">IN SHORT</span>
+      <h2>つまり、今の3食は<br>「産業革命」とセットだった</h2>
+      <p>難しく聞こえますが、話はシンプルです。</p>
+    </div>
+    <div class="ba">
+      <div class="before">
+        <span class="lab">産業革命の前</span>
+        <ul>
+          <li>家や畑の近くで働く</li>
+          <li>仕事の合間に、家でしっかり食べる</li>
+          <li>食べる時間は、仕事と季節しだい</li>
+        </ul>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="after">
+        <span class="lab">産業革命の後</span>
+        <ul>
+          <li>工場に通い、全員が同じ時間に働く</li>
+          <li>昼は決まった休み時間に、一斉に食べる</li>
+          <li>しっかり食べるのは、家に帰った夜</li>
+        </ul>
+      </div>
+    </div>
+    <p class="plain"><span class="badge b-rec">記録あり</span> 18〜19世紀のイギリスやアメリカでは、工場や学校に通う人が増えたことで、食事が「お腹がすいたら」から「時計の時間割どおり」に変わっていきました。朝・昼・晩の3食は、この新しい働き方にぴったり合う形だったのです。</p>
+    <p class="plain"><span class="badge b-view">考察</span> 日本でも、明治以降に工場や学校、会社が同じような時間割を持ちこみました。「朝7時・昼12時・夜7時」のように、時計で決まった3食は、こうした近代の働き方とともに当たり前になっていったと考えられます。</p>
+  </section>
+
+  <section>
+    <div class="sh">
+      <span class="en">WHO BENEFITED</span>
+      <h2>1日3食が常識になって、<br>得をしたのは誰？</h2>
+      <p><span class="badge b-view">考察</span> ここからは、案内人の見方です。</p>
+    </div>
+    <div class="who">
+      <div>
+        <b>働かせる側</b>
+        <p>決まった時間に食べて、決まった時間に働く。時間割どおりの食事は、工場や学校の管理と相性がよかった。</p>
+      </div>
+      <div>
+        <b>食べものを売る側</b>
+        <p>食事の回数が増えれば、売れる量も増える。江戸で屋台や飯屋がにぎわった時期は、3食の広まりと重なっている。</p>
+      </div>
+      <div>
+        <b>では、身体は？</b>
+        <p>身体が「1日3回食べたい」と求めたから3食になった、という記録は見当たらない。先に変わったのは、働き方と暮らしの時間のほうだった。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <span class="k">THE QUESTION</span>
+    <p>1日何食が正しいかは、ここでは決められません。</p>
+    <p class="big">お腹がすいたから、<br>食べていますか？<br>それとも、時間が来たから、<br>食べていますか？</p>
+    <p>その答えに、あなたの「当たり前」の正体が隠れているかもしれません。</p>
+  </section>
+
+  <section>
+    <div class="sh">
+      <span class="en">SOURCES</span>
+      <h2>出典</h2>
+    </div>
+    <ul class="src">
+      <li><a href="https://www.maff.go.jp/j/syokuiku/kodomo_navi/oneday/quiz_a1.html" target="_blank" rel="noopener">農林水産省「子どもの食育」1日3食になったのはいつ？</a></li>
+      <li><a href="https://serai.jp/hobby/1047048" target="_blank" rel="noopener">サライ.jp（車浮代・江戸料理文化研究家）1日3食が定着した江戸時代の背景</a></li>
+      <li><a href="https://daily.jstor.org/why-do-americans-eat-three-meals-a-day/" target="_blank" rel="noopener">JSTOR Daily「Why Do Americans Eat Three Meals a Day?」</a></li>
+      <li><a href="https://www.npr.org/sections/npr-history-dept/2015/09/29/441863396/how-many-daily-meals-did-we-used-to-eat" target="_blank" rel="noopener">NPR「How Many Daily Meals Did We Used To Eat?」（2015年）</a></li>
+      <li><a href="https://culinarylore.com/food-history:who-invented-toast/" target="_blank" rel="noopener">Culinary Lore「Who Invented Toast? The History of Toasted Bread and the First Toasters」</a></li>
+    </ul>
+  </section>
+
+  <section class="next">
+    <a class="btn" href="https://www.instagram.com/kazu.nature_soul/" target="_blank" rel="noopener">Instagramで続きを見る</a>
+    <a class="soon" href="../work/index.html"><b>次の展示</b>　仕事はなぜ、1日8時間なの？ →</a>
+  </section>
+
+  <a class="homeback" href="../room4/index.html">← 社会の裏側の部屋へ戻る</a>
+  <a class="homeback" href="../index.html" style="border-color:var(--rule);font-weight:500">陳列室の入口へ</a>
+  <footer class="note">© 2026 Kazu.Ouchi ｜ 歴史には諸説があります。新しい資料が見つかれば、展示を更新します。</footer>
+</div>
+
+<script>
+(function () {
+  var yes = document.getElementById("yes"), no = document.getElementById("no");
+  function pick(v) {
+    window.kzTrack && window.kzTrack("origins-ask-" + (v ? "yes" : "no"), "展示の問い（origins） " + (v ? "○" : "×"));
+    yes.setAttribute("aria-pressed", String(v));
+    no.setAttribute("aria-pressed", String(!v));
+    yes.disabled = true; no.disabled = true;
+    document.getElementById("ansHead").textContent = v ? "答えは × 。昔は1日2食でした。" : "正解です。昔は1日2食でした。";
+    document.getElementById("ans").hidden = false;
+  }
+  yes.addEventListener("click", function () { pick(true); });
+  no.addEventListener("click", function () { pick(false); });
+})();
+</script>
+
+<script>
+(function () {
+  try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
+  function top() { if (!location.hash) window.scrollTo(0, 0); }
+  top();
+  window.addEventListener("load", top);
+  window.addEventListener("pageshow", top);
+})();
+</script>
+<script>
+window.kzTrack = function (path, title) {
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true }); } catch (e) {}
+};
+</script>
+<script data-goatcounter="https://kazu-ouchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

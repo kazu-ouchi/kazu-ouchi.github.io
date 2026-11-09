@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}
+.homeback { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 15px 16px; border: 1px solid var(--ink); background: var(--card); color: var(--ink); text-decoration: none; font-weight: 700; font-size: 15px; letter-spacing: .1em; }
+.homeback:hover { border-color: var(--terra); color: var(--terra); }
+.backbar a { padding: 6px 0; }
+</style>
+<title>その食の常識、本当？</title>
+<meta name="description" content="よく聞く食べものの話を10問。○か×で答えると、あなたの思い込み度と思い込みタイプがわかります。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: 明るい陳列室の「食べものの棚」。表紙の絵 → 設問カード → 判定カード（スクショ1枚で完結）。ホームページと同じ色の単一テーマ */
+:root {
+  --paper: #FBF8F2;
+  --card: #FFFFFF;
+  --ink: #2B2A26;
+  --muted: #6B675E;
+  --rule: #E6DFD2;
+  --wash: #F1ECE2;
+  --sage: #6F7F5C;
+  --sage-soft: #E8ECE0;
+  --terra: #B5563A;
+  --terra-soft: #F6E4DD;
+  --brass: #8A6A3E;
+  --mincho: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
+  --body: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.85; -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+.wrap {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+main, section { display: flex; flex-direction: column; gap: 20px; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--terra); outline-offset: 3px; }
+
+/* 表紙 */
+.cover {
+  position: relative;
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  aspect-ratio: 1 / 1;
+  max-width: none;
+  background: var(--wash) url("cover.jpg") center / cover no-repeat;
+}
+.cover::after { content: ""; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(transparent, var(--paper)); }
+.cover .tag {
+  position: absolute;
+  top: 14px;
+  left: max(16px, env(safe-area-inset-left, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .16em;
+  color: var(--ink);
+}
+.cover .tag span { background: rgba(251, 248, 242, .85); padding: 2px 8px; }
+.eyebrow { margin: -6px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: var(--brass); }
+h1 { margin: -8px 0 0; font-family: var(--mincho); font-weight: 800; font-size: clamp(2.3rem, 10.5vw, 3.2rem); line-height: 1.3; letter-spacing: .04em; }
+h1 span { color: var(--terra); }
+.lead { margin: 0; }
+.lead b { color: var(--terra); }
+.scale { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.scale ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; }
+.scale li { display: flex; align-items: center; gap: 10px; padding: 11px 4px; font-size: 14px; }
+.scale li:nth-child(n+3) { border-top: 1px solid var(--rule); }
+.scale .g { flex: none; width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid var(--terra); border-radius: 50%; color: var(--terra); font-family: var(--mincho); font-weight: 800; font-size: 14px; line-height: 1; }
+.byline { margin: 0; font-size: 13px; line-height: 1.7; color: var(--muted); }
+
+.primary, .secondary {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  font: 700 16px/1.3 var(--body);
+  letter-spacing: .14em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .15s;
+}
+.primary { border: 0; background: var(--ink); color: var(--paper); }
+.primary:hover { background: var(--terra); }
+.secondary { border: 1px solid var(--ink); background: transparent; color: var(--ink); }
+.ghost { align-self: center; background: none; border: 0; padding: 8px 12px; color: var(--muted); font: 14px var(--body); text-decoration: underline; cursor: pointer; }
+
+.panel { background: var(--card); border: 1px solid var(--rule); padding: 22px 18px; display: flex; flex-direction: column; gap: 16px; }
+#quiz { margin-top: 20px; }
+.qhead { display: flex; flex-direction: column; gap: 10px; }
+.qno { display: flex; align-items: baseline; gap: 8px; }
+#qNum { font-family: var(--mincho); font-weight: 800; font-size: 28px; line-height: 1; color: var(--terra); }
+.qof { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.ticks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.ticks li { height: 4px; background: var(--wash); }
+.ticks li.cur { background: var(--muted); }
+.ticks li.ok { background: var(--sage); }
+.ticks li.ng { background: var(--terra); }
+.qtext { margin: 0; font-family: var(--mincho); font-weight: 700; font-size: clamp(1.3rem, 5.6vw, 1.5rem); line-height: 1.7; text-wrap: pretty; min-height: 5.1em; }
+.qtext:focus { outline: none; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.choice {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  min-height: 150px; padding: 22px 8px 14px;
+  background: var(--paper); border: 1px solid var(--rule); color: var(--ink); font: inherit; cursor: pointer;
+  transition: border-color .15s, background-color .15s, opacity .2s;
+}
+@media (hover: hover) { .choice:not(:disabled):hover { border-color: var(--muted); } }
+.choice:disabled { cursor: default; }
+.choice.picked { border-color: var(--ink); background: var(--card); }
+.choice.dim { opacity: .3; }
+.mk { position: relative; width: 62px; height: 62px; }
+.mk-maru { box-sizing: border-box; border: 7px solid var(--terra); border-radius: 50%; }
+.mk-batsu::before, .mk-batsu::after { content: ""; position: absolute; left: 50%; top: 50%; width: 80px; height: 7px; background: var(--sage); transform: translate(-50%, -50%) rotate(45deg); }
+.mk-batsu::after { transform: translate(-50%, -50%) rotate(-45deg); }
+.cap { font-size: 14px; font-weight: 700; letter-spacing: .14em; }
+
+.reveal { display: flex; flex-direction: column; gap: 12px; padding-top: 18px; border-top: 1px solid var(--rule); animation: rise .25s ease-out; }
+.verdict { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.stamp { display: inline-block; padding: 2px 12px; border: 1.5px solid currentColor; font-family: var(--mincho); font-weight: 800; font-size: 18px; line-height: 1.5; transform: rotate(-4deg); }
+.stamp.ok { color: var(--sage); background: var(--sage-soft); }
+.stamp.ng { color: var(--terra); background: var(--terra-soft); }
+.vans { font-size: 14px; font-weight: 700; color: var(--muted); }
+.vans .m { font-family: var(--mincho); font-weight: 800; font-size: 20px; margin-left: 6px; color: var(--ink); }
+.rlabel { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--brass); }
+.rhead { margin: -6px 0 0; font-family: var(--mincho); font-weight: 800; font-size: 20px; line-height: 1.5; text-wrap: balance; }
+.rbody { margin: 0; font-size: 15.5px; line-height: 1.95; }
+.src { margin: 0; padding: 10px 12px; background: var(--wash); font-size: 12.5px; line-height: 1.7; color: var(--muted); }
+.src b { color: var(--brass); margin-right: 6px; }
+
+/* 結果カード */
+#result { margin-top: 20px; }
+.rcard { background: var(--card); border: 1px solid var(--rule); display: flex; flex-direction: column; }
+.rcard .pic { aspect-ratio: 16 / 9; max-width: 100%; background: var(--wash) url("cover.jpg") center 40% / cover no-repeat; position: relative; }
+.rcard .pic span { position: absolute; top: 10px; left: 12px; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; background: rgba(251, 248, 242, .88); padding: 2px 8px; }
+.rcard .in { padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+.card-top { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: .14em; color: var(--brass); }
+.card-top::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+.card-main { display: flex; align-items: center; gap: 18px; }
+.gstamp { flex: none; width: 80px; height: 80px; box-sizing: border-box; display: grid; place-items: center; border: 3px solid var(--terra); border-radius: 50%; box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px var(--terra); color: var(--terra); transform: rotate(-8deg); }
+.gstamp.press { animation: press .45s cubic-bezier(.2, .8, .3, 1.2); }
+.gstamp .gl { font-family: var(--mincho); font-weight: 800; font-size: 40px; line-height: 1; }
+.judge { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.slabel { font-size: 12px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
+.gname { font-family: var(--mincho); font-weight: 800; font-size: 22px; line-height: 1.35; color: var(--terra); }
+.score { display: flex; flex-direction: column; gap: 6px; }
+.score-num { font-family: var(--mincho); font-weight: 800; font-size: 54px; line-height: 1; font-variant-numeric: tabular-nums; }
+.score-num small { font-size: 22px; margin-left: 4px; }
+.meter { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; max-width: 280px; }
+.meter span { height: 6px; background: var(--wash); }
+.meter span.on { background: var(--terra); }
+.tname { font-family: var(--mincho); font-weight: 800; font-size: clamp(1.6rem, 7.4vw, 2rem); line-height: 1.35; }
+.tshort { margin: 2px 0 0; font-size: 14.5px; line-height: 1.8; color: var(--muted); }
+.rfoot { display: flex; flex-direction: column; gap: 2px; padding-top: 12px; border-top: 1px solid var(--rule); }
+.rtitle { font-family: var(--mincho); font-weight: 800; font-size: 16px; }
+.rhandle { font-size: 12px; color: var(--muted); }
+.rhandle b { font-family: var(--mono); font-weight: 500; color: var(--terra); }
+.ask { margin: 0; text-align: center; font-family: var(--mincho); font-weight: 700; font-size: 18px; line-height: 1.6; }
+
+.sec-h { margin: 0; font-family: var(--mincho); font-weight: 800; font-size: 19px; line-height: 1.5; }
+.rx { margin: 0; padding-left: 12px; border-left: 2px solid var(--terra); font-size: 15px; line-height: 1.8; }
+.rx b { display: block; font-size: 12px; letter-spacing: .16em; color: var(--terra); }
+.items { list-style: none; margin: 0; padding: 0; }
+.items li { display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: 12px; padding: 11px 0; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.6; }
+.items li:first-child { border-top: 0; padding-top: 0; }
+.items .no { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
+.items .lb { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.items .find { font-size: 13px; color: var(--brass); }
+.pill { padding: 1px 10px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.pill.ok { color: var(--sage); background: var(--sage-soft); }
+.pill.ng { color: var(--terra); background: var(--terra-soft); }
+.cta p { margin: 0; }
+.note { font-size: 12px; line-height: 1.7; color: var(--muted); }
+
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes press { from { opacity: 0; transform: rotate(-8deg) scale(1.4); } to { opacity: 1; transform: rotate(-8deg) scale(1); } }
+@media (prefers-reduced-motion: reduce) { .reveal, .gstamp.press { animation: none; } .choice, .primary { transition: none; } }
+@media (min-width: 560px) {
+  .cover { margin: 16px 0 0; }
+  .panel { padding: 26px; }
+  .scale ul { grid-template-columns: repeat(4, 1fr); }
+  .scale li { flex-direction: column; text-align: center; gap: 6px; font-size: 13px; }
+  .scale li:nth-child(n+3) { border-top: 0; }
+}
+
+.backbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 12px; font-size: 13px; }
+.backbar a { color: var(--muted); text-decoration: none; font-weight: 700; letter-spacing: .06em; }
+.backbar a:hover { color: var(--terra); }
+.backbar span { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--brass); }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <nav class="backbar" aria-label="サイト内の移動"><a href="../room2/index.html">← 食べものの部屋へ</a><span>ROOM 2 ／ 食べもの</span></nav>
+  <main>
+    <section id="start">
+      <div class="cover"><div class="tag"><span>ROOM 2 ／ FOOD</span><span>10 Q</span></div></div>
+      <p class="eyebrow">全10問 ・ 約3分 ・ ○×で答えるだけ</p>
+      <h1>その食の常識、<br><span>本当？</span></h1>
+      <p class="lead">毎日口にする食べものの「よく聞く話」を10個集めました。○か×で答えると、あなたの<b>思い込み度</b>と<b>思い込みタイプ</b>がわかります。1問ごとに、仕組みの解説と根拠つき。</p>
+      <div class="scale" aria-label="判定区分">
+        <ul>
+          <li><span class="g">A</span>異常なし</li>
+          <li><span class="g">B</span>軽度の思い込み</li>
+          <li><span class="g">C</span>要経過観察</li>
+          <li><span class="g">D</span>要精密検査</li>
+        </ul>
+      </div>
+      <button type="button" id="startBtn" class="primary">検査をはじめる</button>
+      <p class="byline">作成：Kazu.Ouchi ｜ 魂の構造探究者</p>
+    </section>
+
+    <section id="quiz" class="panel" hidden>
+      <div class="qhead">
+        <div class="qno"><span id="qNum">Q.01</span><span class="qof">/ 10</span></div>
+        <ol class="ticks" id="ticks" aria-hidden="true"></ol>
+      </div>
+      <p class="qtext" id="qText" tabindex="-1"></p>
+      <div class="choices">
+        <button type="button" class="choice" id="btnMaru" aria-label="○ そのとおり"><span class="mk mk-maru" aria-hidden="true"></span><span class="cap">そのとおり</span></button>
+        <button type="button" class="choice" id="btnBatsu" aria-label="× ちがう"><span class="mk mk-batsu" aria-hidden="true"></span><span class="cap">ちがう</span></button>
+      </div>
+      <div id="reveal" class="reveal" hidden aria-live="polite">
+        <div class="verdict"><span class="stamp" id="vStamp">正解</span><span class="vans" id="vAns"></span></div>
+        <p class="rlabel">MECHANISM ／ 仕組み</p>
+        <h2 class="rhead" id="rHead"></h2>
+        <p class="rbody" id="rBody"></p>
+        <p class="src" id="rSrc"></p>
+        <button type="button" class="primary" id="nextBtn">次の問題へ</button>
+      </div>
+    </section>
+
+    <section id="result" hidden>
+      <div class="rcard">
+        <div class="pic"><span>FOOD MYTHS ／ RESULT</span></div>
+        <div class="in">
+          <div class="card-top"><span>検査結果</span></div>
+          <div class="card-main">
+            <div class="gstamp" id="gStamp"><span class="gl" id="gLetter">A</span></div>
+            <div class="judge"><span class="slabel">判定</span><span class="gname" id="gName">異常なし</span></div>
+          </div>
+          <div class="score">
+            <span class="slabel">思い込み度</span>
+            <div class="score-num"><span id="pct">0</span><small>%</small></div>
+            <div class="meter" id="meter" aria-hidden="true"></div>
+          </div>
+          <div>
+            <span class="slabel">あなたは</span>
+            <div class="tname" id="tName"></div>
+            <p class="tshort" id="tShort"></p>
+          </div>
+          <div class="rfoot"><span class="rtitle">その食の常識、本当？</span><span class="rhandle">診断は <b>@kazu.nature_soul</b> のプロフィールから</span></div>
+        </div>
+      </div>
+      <p class="ask">家族や友だちは、何問見抜けるだろう？</p>
+
+      <div class="panel">
+        <h2 class="sec-h">所見と処方</h2>
+        <p id="tTag" style="margin:0"></p>
+        <p class="rx"><b>処方</b><span id="tRx"></span></p>
+        <ol class="items" id="items"></ol>
+      </div>
+
+      <div class="panel cta">
+        <h2 class="sec-h">なぜ、そうなるのか</h2>
+        <p>身体・食・健康の「当たり前」を、仕組みから掘り下げて発信しています。続きはInstagramで。</p>
+        <a class="primary" href="https://www.instagram.com/kazu.nature_soul/" target="_blank" rel="noopener">Instagramで続きを見る</a>
+        <button type="button" class="ghost" id="retryBtn">もう一度検査する</button>
+      </div>
+    </section>
+  </main>
+  <a class="homeback" href="../room2/index.html">← 食べものの部屋へ戻る</a>
+  <a class="homeback" href="../index.html" style="border-color:var(--rule);font-weight:500">陳列室の入口へ</a>
+  <footer class="note">解説は、公的機関の資料や研究報告をもとにした一般的な情報です。持病がある方や食事制限を受けている方は、医師や管理栄養士の指示を優先してください。</footer>
+</div>
+
+<script>
+(function () {
+  var Q = [
+    { t: "卵は、コレステロールが多いので1日1個までにしたほうがいい。", a: false, label: "卵は1日1個まで",
+      h: "「1日1個」に、決まった根拠はない",
+      b: "食べものから入るコレステロールが血液中の値に与える影響は、人によって大きく違い、体内で作られる量のほうがずっと多いことがわかってきました。そのため国の基準でも、健康な人向けのコレステロールの上限は2015年に撤廃されています。ただし、脂質異常症などで医師から指導を受けている人は別です。",
+      s: "厚生労働省「日本人の食事摂取基準（2015年版）」でコレステロールの目標量を設定せず" },
+    { t: "「カロリーゼロ」と書いてある飲みものは、カロリーがまったくない。", a: false, label: "カロリーゼロ表示",
+      h: "「ゼロ」は、完全なゼロとは限らない",
+      b: "食品表示のルールでは、100mlあたり5kcal未満なら「ゼロ」「ノン」と表示できます。少しのカロリーでも、何本も飲めば積み重なります。「ゼロ」は「とても少ない」という意味だと考えておくのが正確です。",
+      s: "消費者庁「食品表示基準」の栄養強調表示のルール" },
+    { t: "塩分は、とればとるほど身体に悪い。", a: false, label: "塩分の量",
+      h: "塩は、身体に欠かせない成分でもある",
+      b: "塩に含まれるナトリウムは、神経や筋肉の働き、身体の水分バランスに欠かせません。少なすぎても、だるさや脱水、低ナトリウム血症の原因になります。どのくらいが適量かは研究者の間でも議論が続いていて、汗の量や腎臓の状態などで人によって変わります。「減らせば減らすほど良い」とは言えません。",
+      s: "塩分量と健康リスクの関係が直線ではない可能性を示した大規模研究（PURE研究など）" },
+    { t: "炊いて冷ましたご飯は、炊きたてのご飯より血糖値が上がりにくい。", a: true, label: "冷ましたご飯",
+      h: "冷めると、でんぷんの形が変わる",
+      b: "ご飯のでんぷんは、冷めると一部が「レジスタントスターチ」という消化されにくい形に変わります。そのため、炊きたてより血糖値の上がり方がゆるやかになったという研究があります。冷ましたあとに温め直しても、ある程度は残るとされています。",
+      s: "冷やした米飯と炊きたての米飯で、食後の血糖値の上がり方を比べた研究（2015年）" },
+    { t: "朝食を抜くと、太りやすくなる。", a: false, label: "朝食と体重",
+      h: "朝食を食べても、やせるとは言えない",
+      b: "「朝食を抜くと太る」はよく聞く話ですが、朝食を食べる・抜くを比べた試験をまとめた研究では、朝食を食べたほうが体重が減るという結果は出ていません。大事なのは、1日全体で何をどれだけ食べるかと、その人の生活リズムに合っているかです。",
+      s: "朝食と体重に関するランダム化比較試験のメタ解析（BMJ、2019年）" },
+    { t: "「無添加」と書いてある食品には、添加物がまったく使われていない。", a: false, label: "「無添加」表示",
+      h: "「無添加」は、何が無添加かが大事",
+      b: "「無添加」は、多くの場合「特定の添加物を使っていない」という意味です。保存料は無添加でも、ほかの添加物が使われていることがあります。あいまいな「無添加」表示で誤解させないよう、国もガイドラインを作って表示を見直しています。",
+      s: "消費者庁「食品添加物の不使用表示に関するガイドライン」" },
+    { t: "日本人の多くは、食物繊維が足りていない。", a: true, label: "食物繊維の不足",
+      h: "食物繊維は、多くの年代で不足ぎみ",
+      b: "食物繊維は、腸内細菌のエサになり、血糖値の上がり方をゆるやかにするなど、大事な働きがあります。国が示す目標量に対して、多くの年代で実際の摂取量が届いていません。白いご飯やパンだけでなく、野菜、海藻、きのこ、豆、雑穀をプラスするのが近道です。",
+      s: "厚生労働省「日本人の食事摂取基準」の目標量と「国民健康・栄養調査」の摂取量" },
+    { t: "冷凍の野菜は、生の野菜より栄養が劣る。", a: false, label: "冷凍野菜の栄養",
+      h: "冷凍は、栄養を閉じこめる方法でもある",
+      b: "冷凍野菜の多くは、収穫してすぐに下ゆでして急速冷凍されます。生の野菜は、店に並んで家の冷蔵庫に入るまでの数日でビタミンが少しずつ減っていきます。比べた研究でも、冷凍と生で栄養は同じくらい、成分によっては冷凍のほうが多いという報告があります。",
+      s: "生鮮・冷凍野菜の栄養価を比較した研究報告" },
+    { t: "超加工食品をたくさん食べる人ほど、さまざまな病気のリスクが高いという研究報告がある。", a: true, label: "超加工食品",
+      h: "加工の「度合い」が注目されている",
+      b: "工場で多くの工程と添加物を経て作られる「超加工食品」を多く食べる人ほど、心臓や血管の病気、2型糖尿病、うつなど、さまざまな健康リスクとの関連が報告されています。まだ「関連」の段階ですが、何を食べるかと同じくらい、どう作られたかに注目が集まっています。",
+      s: "超加工食品と健康に関する研究をまとめたアンブレラレビュー（BMJ、2024年）" },
+    { t: "健康のためには、水を1日2リットル飲まなければいけない。", a: false, label: "水を1日2リットル",
+      h: "身体の水は、食べものからも入っている",
+      b: "「1日2リットル」という数字に、全員に当てはまる科学的な根拠はありません。ご飯、野菜、汁物など、食事からも1日1リットル前後の水分をとっています。必要な量は、気温、運動、体格で大きく変わります。のどが渇く前に、こまめに飲むことのほうが大切です。",
+      s: "必要な水分量は食事中の水分を含めて考えるのが一般的" }
+  ];
+
+  var GRADES = [
+    { max: 1, g: "A", n: "異常なし" },
+    { max: 3, g: "B", n: "軽度の思い込み" },
+    { max: 6, g: "C", n: "要経過観察" },
+    { max: 10, g: "D", n: "要精密検査" }
+  ];
+  var TYPES = [
+    { name: "表示信仰タイプ", qs: [1, 5],
+      short: "パッケージの言葉を、そのまま信じやすい。",
+      tag: "「ゼロ」「無添加」など、パッケージの言葉をそのまま受け取りやすい傾向が出ています。表示には、決まったルールと「言える範囲」があります。",
+      rx: "表の言葉より、裏の原材料名と栄養成分表示を見る。" },
+    { name: "ルール信仰タイプ", qs: [0, 4, 9],
+      short: "「1日○個」「必ず」の決まりごとを信じやすい。",
+      tag: "「1日1個まで」「朝食は必ず」「水は2リットル」など、わかりやすい決まりごとを信じやすい傾向が出ています。身体に必要な量は、人によって違います。",
+      rx: "その数字は誰が、何のために決めたのかを一度調べてみる。" },
+    { name: "イメージ信仰タイプ", qs: [2, 7],
+      short: "「塩は悪」「生が一番」のイメージで判断しやすい。",
+      tag: "「塩は身体に悪い」「生のほうが栄養がある」など、イメージで良い・悪いを決めやすい傾向が出ています。イメージの裏には、見落としがちな仕組みがあります。",
+      rx: "「良い」「悪い」と決める前に、身体の中で何が起きているかを調べてみる。" },
+    { name: "見落としタイプ", qs: [3, 6, 8],
+      short: "食べ方や作られ方の違いを、軽く見積もりやすい。",
+      tag: "ご飯の冷まし方、加工の度合い、食物繊維など、同じ食べものでも「どう食べるか」「どう作られたか」で変わる点を軽く見積もりやすい傾向が出ています。",
+      rx: "何を食べるかと同じくらい、どう食べるか・どう作られたかを見る。" }
+  ];
+  var MASTER = {
+    name: "食の構造探究者タイプ",
+    short: "よく聞く話に流されず、食を仕組みで捉えられている。",
+    tag: "表示やイメージに流されず、食べものを仕組みで捉えられています。引っかかりやすい「食の常識」をほぼ見抜けました。",
+    rx: "その目で、毎日の買い物かごの中身も見直してみる。"
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var i = 0, answers = [];
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function toTop() { try { window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); } catch (e) { window.scrollTo(0, 0); } }
+
+  function computeResult() {
+    var flags = Q.map(function (q, k) { return answers[k] !== q.a; });
+    var wrong = flags.filter(Boolean).length;
+    var gr = GRADES.filter(function (g) { return wrong <= g.max; })[0];
+    var type = MASTER;
+    if (wrong > 1) {
+      var best = null;
+      TYPES.forEach(function (t) {
+        var c = t.qs.filter(function (k) { return flags[k]; }).length;
+        var r = c / t.qs.length;
+        if (!best || r > best.r || (r === best.r && c > best.c)) best = { t: t, r: r, c: c };
+      });
+      type = best.t;
+    }
+    return { wrong: wrong, pct: wrong * 10, grade: gr, type: type, flags: flags };
+  }
+  function renderTicks() {
+    var ol = $("ticks");
+    ol.innerHTML = "";
+    for (var k = 0; k < Q.length; k++) {
+      var li = document.createElement("li");
+      if (k < answers.length) li.className = answers[k] === Q[k].a ? "ok" : "ng";
+      else if (k === i) li.className = "cur";
+      ol.appendChild(li);
+    }
+  }
+  function renderQ() {
+    $("qNum").textContent = "Q." + pad(i + 1);
+    $("qText").textContent = Q[i].t;
+    [$("btnMaru"), $("btnBatsu")].forEach(function (b) { b.disabled = false; b.classList.remove("picked", "dim"); });
+    $("reveal").hidden = true;
+    renderTicks();
+  }
+  function answer(v) {
+    if (answers.length > i) return;
+    var q = Q[i];
+    answers.push(v);
+    var picked = v ? $("btnMaru") : $("btnBatsu"), other = v ? $("btnBatsu") : $("btnMaru");
+    picked.classList.add("picked"); other.classList.add("dim");
+    picked.disabled = true; other.disabled = true;
+    var ok = v === q.a, st = $("vStamp");
+    st.textContent = ok ? "正解" : "思い込み";
+    st.className = "stamp " + (ok ? "ok" : "ng");
+    var va = $("vAns");
+    va.textContent = "正解は";
+    var m = document.createElement("span");
+    m.className = "m";
+    m.textContent = q.a ? "○" : "×";
+    va.appendChild(m);
+    $("rHead").textContent = q.h;
+    $("rBody").textContent = q.b;
+    var src = $("rSrc");
+    src.textContent = "";
+    var sb = document.createElement("b"); sb.textContent = "根拠"; src.appendChild(sb);
+    src.appendChild(document.createTextNode(q.s));
+    $("nextBtn").textContent = i === Q.length - 1 ? "結果を見る" : "次の問題へ";
+    $("reveal").hidden = false;
+    renderTicks();
+    try { $("reveal").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); } catch (e) {}
+  }
+  function showResult() {
+    var res = computeResult();
+    window.kzTrack && window.kzTrack("food-quiz-finish-" + res.grade.g, "クイズ完走（food） " + res.grade.g + "判定 / " + res.type.name);
+    $("gLetter").textContent = res.grade.g;
+    $("gName").textContent = res.grade.n;
+    $("pct").textContent = res.pct;
+    $("tName").textContent = res.type.name;
+    $("tShort").textContent = res.type.short;
+    $("tTag").textContent = res.type.tag;
+    $("tRx").textContent = res.type.rx;
+    var meter = $("meter");
+    meter.innerHTML = "";
+    for (var j = 0; j < 10; j++) { var s = document.createElement("span"); if (j < res.wrong) s.className = "on"; meter.appendChild(s); }
+    var items = $("items");
+    items.innerHTML = "";
+    Q.forEach(function (q, k) {
+      var ng = res.flags[k], li = document.createElement("li");
+      var no = document.createElement("span"); no.className = "no"; no.textContent = "Q." + pad(k + 1);
+      var lb = document.createElement("span"); lb.className = "lb";
+      var t1 = document.createElement("span"); t1.textContent = q.label; lb.appendChild(t1);
+      if (ng) { var t2 = document.createElement("span"); t2.className = "find"; t2.textContent = q.h; lb.appendChild(t2); }
+      var pl = document.createElement("span"); pl.className = "pill " + (ng ? "ng" : "ok"); pl.textContent = ng ? "思い込み" : "正解";
+      li.appendChild(no); li.appendChild(lb); li.appendChild(pl);
+      items.appendChild(li);
+    });
+    $("quiz").hidden = true;
+    $("result").hidden = false;
+    var stamp = $("gStamp");
+    stamp.classList.remove("press"); void stamp.offsetWidth; stamp.classList.add("press");
+    toTop();
+  }
+  function start() {
+    window.kzTrack && window.kzTrack("food-quiz-start", "クイズ開始（food）");
+    i = 0; answers = [];
+    $("start").hidden = true; $("result").hidden = true; $("quiz").hidden = false;
+    renderQ(); toTop();
+  }
+  $("startBtn").addEventListener("click", start);
+  $("retryBtn").addEventListener("click", start);
+  $("btnMaru").addEventListener("click", function () { answer(true); });
+  $("btnBatsu").addEventListener("click", function () { answer(false); });
+  $("nextBtn").addEventListener("click", function () {
+    i++;
+    if (i < Q.length) { renderQ(); toTop(); try { $("qText").focus({ preventScroll: true }); } catch (e) {} }
+    else showResult();
+  });
+})();
+</script>
+
+<script>
+(function () {
+  try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
+  function top() { if (!location.hash) window.scrollTo(0, 0); }
+  top();
+  window.addEventListener("load", top);
+  window.addEventListener("pageshow", top);
+})();
+</script>
+<script>
+window.kzTrack = function (path, title) {
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true }); } catch (e) {}
+};
+</script>
+<script data-goatcounter="https://kazu-ouchi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
