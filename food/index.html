@@ -470,6 +470,7 @@ h1 span { color: var(--terra); }
     renderQ(); toTop();
   }
   $("startBtn").addEventListener("click", start);
+  if (location.hash === "#start") { try { history.replaceState(null, "", location.pathname); } catch (e) {} start(); }
   $("retryBtn").addEventListener("click", start);
   $("btnMaru").addEventListener("click", function () { answer(true); });
   $("btnBatsu").addEventListener("click", function () { answer(false); });
